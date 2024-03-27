@@ -1,0 +1,245 @@
+.container {
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	background-image: linear-gradient(to left, #791d73, #003253);
+}
+
+.contJust {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.contCad {
+	background-color: #fff;
+	width: 99%;
+	height: 97%;
+	border-radius: 16px;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.header {
+	width: 98%;
+	height: 15%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.bts {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: end;
+}
+
+.title {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 24px;
+}
+
+.bts input[type="file"] {
+	display: none;
+}
+
+.btFile {
+	background-color: #028a46;
+	color: white;
+	border: 0;
+	width: 230px;
+	height: 90px;
+	border-radius: 8px;
+	font-size: 24px;
+	font-weight: bold;
+	cursor: pointer;
+	z-index: 2;
+	transition: all 0.1s ease-in-out;
+}
+
+.btFile:hover {
+	filter: brightness(110%);
+	transform: scale(1.02);
+}
+
+.btBArquivo {
+	background-color: #007bc0;
+	color: white;
+	border: 0;
+	width: 230px;
+	height: 90px;
+	border-radius: 8px;
+	font-size: 24px;
+	font-weight: bold;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 2;
+	transition: all 0.1s ease-in-out;
+	cursor: pointer;
+}
+
+.btBArquivo:hover {
+	filter: brightness(110%);
+	transform: scale(1.02);
+}
+
+.contI {
+	height: 80px;
+	width: 260px;
+	position: fixed;
+	z-index: 1;
+}
+
+.i {
+	cursor: pointer;
+	color: #565656;
+	height: 25px;
+}
+
+.descI {
+	display: none;
+	position: fixed;
+	z-index: 10;
+	width: 200px;
+	height: 75px;
+	left: 74%;
+	top: 10.8%;
+
+	background-color: #fff;
+	border: 2px solid #565656;
+	border-radius: 8px;
+
+	align-items: center;
+	justify-content: space-evenly;
+	text-align: center;
+	flex-direction: column;
+}
+
+.descI p {
+	margin: 0;
+	padding: 0;
+}
+
+.i:hover .descI {
+	display: flex;
+}
+
+.contInfos {
+	width: 98%;
+	height: 625px;
+	border: 2px solid #565656;
+	border-radius: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.infos {
+	overflow: auto;
+	width: 99%;
+	height: 98%;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: start;
+}
+
+.infos::-webkit-scrollbar {
+	width: 12px;
+}
+
+.infos::-webkit-scrollbar-track {
+	border-radius: 8px;
+	background-color: #c6c6c6;
+}
+
+.infos::-webkit-scrollbar-thumb {
+	border-radius: 8px;
+	background-color: #565656;
+}
+
+.footer {
+	width: 98%;
+	height: 90px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.send {
+	width: 300px;
+	height: 75px;
+	border: 0;
+	border-radius: 8px;
+	background-image: linear-gradient(to right, #1f60a5, #05a9cf);
+	color: white;
+	font-size: 28px;
+	font-weight: bold;
+	transition: all 0.2s ease-in-out;
+	cursor: pointer;
+	margin: 0 auto;
+}
+
+.send:hover {
+	filter: brightness(120%);
+	background-image: linear-gradient(to right, #05a9cf, #1f60a5);
+	transform: scale(1.02);
+}
+
+@media only screen and (max-width: 1366px) {
+	.header {
+		height: 105px;
+	}
+
+	.btFile {
+		width: 200px;
+		height: 75px;
+	}
+
+	.btBArquivo {
+		width: 200px;
+		height: 75px;
+		font-size: 20px;
+	}
+
+	.contI {
+		height: 65px;
+		width: 235px;
+	}
+
+	.descI {
+		left: 63.8%;
+		top: 95px;
+	}
+
+	.title {
+		font-size: 16px;
+	}
+
+	.contInfos {
+		height: 390px;
+	}
+
+	.send {
+		width: 230px;
+		height: 60px;
+	}
+}
+
+.board {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+}

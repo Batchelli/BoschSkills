@@ -1,0 +1,142 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: column;
+}
+
+.cont {
+  width: 100%;
+  height: 100%;
+  padding: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imgMask {
+  width: 700px;
+  height: 460px;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.texts {
+  height: 460px;
+  width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  width: 90%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+}
+
+.title h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 5px;
+  font-size: 28px;
+}
+
+.desc {
+  width: 90%;
+  height: auto;
+  max-height: 225px;
+  display: flex;
+  align-items: start;
+}
+
+
+.desc p {
+  margin: 0;
+  padding: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+}
+
+.infos {
+  width: 90%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.txt {
+  height: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.txt {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  margin: 0;
+  padding: 5px;
+}
+
+.links:hover {
+  color: #000000;
+  text-decoration: none;
+}
+
+.links {
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+}
+
+.links {
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+}
+
+.links:hover {
+  color: #000000;
+}
+
+.titles {
+  color: #fff;
+}
+
+.trilhaImg::before {
+  background-color: #aaaaaa73 !important;
+}
+
+.textsTri {
+  width: 100%;
+  word-break: break-all;
+}
+
+.contTri {
+  width: 100%;
+  height: 10px;
+}
+
+#topicos {
+  padding-top: 8px;
+}
+
+@media only screen and (max-width: 720px){
+  .cont{
+    flex-direction: column;
+    height: 960px;
+  }
+  .texts{
+    align-items: start;
+  }
+}

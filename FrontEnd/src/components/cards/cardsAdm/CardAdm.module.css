@@ -1,0 +1,110 @@
+.card {
+	width: 500px;
+	height: 750px;
+	border-radius: 16px;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 50px;
+
+	border: 2px solid #c5c5c5;
+	color: #000000;
+	background-color: #fcfcfc;
+
+	cursor: pointer;
+	transition: all 0.15s ease-in-out;
+	text-decoration: none;
+}
+
+.desc {
+	display: none;
+}
+
+.card:hover .desc {
+	display: flex;
+}
+
+#blue:hover {
+	background-color: #007bc0;
+	color: white;
+	border: 2px solid #007bc0;
+	transform: scale(1.02);
+}
+#green:hover {
+	background-color: #18837e;
+	color: white;
+	border: 2px solid #18837e;
+	transform: scale(1.02);
+}
+#pink:hover {
+	background-color: #9e2896;
+	color: white;
+	border: 2px solid #9e2896;
+	transform: scale(1.02);
+}
+
+.card:hover .cardImg {
+	height: 25%;
+}
+
+.title {
+	width: 90%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 25%;
+	font-size: 28px;
+}
+
+.desc {
+	height: 45%;
+	width: 90%;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
+	font-size: 22px;
+	color: white;
+}
+
+.cardImg {
+	height: 50%;
+	width: 90%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.cardImg img {
+	width: 150px;
+}
+
+.imgH {
+	display: none;
+}
+
+.card:hover .imgH {
+	display: flex;
+}
+
+.card:hover .imgNH {
+	display: none;
+}
+
+@media only screen and (max-width: 1366px) {
+	.card {
+		width: 310px;
+		height: 450px;
+	}
+  .cardImg img {
+    width: 100px;
+  }
+
+  .title{
+    font-size: 24px;
+  }
+
+  .desc{
+    font-size: 18px;
+  }
+}

@@ -1,0 +1,102 @@
+.container {
+	position: fixed;
+	z-index: 11;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.content {
+	background-color: #fff;
+	width: 400px;
+	height: auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 15px;
+	border-radius: 8px;
+	border: 1px solid #919191;
+  -webkit-box-shadow: 2px 2px 9px 0px rgba(87,87,87,0.57);
+  -moz-box-shadow: 2px 2px 9px 0px rgba(87,87,87,0.57);
+  box-shadow: 2px 2px 9px 0px rgba(87,87,87,0.57);
+}
+
+.contClose {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-bottom: 10px;
+}
+
+.btClose {
+	font-size: 35px;
+	width: 35px;
+	height: 35px;
+	font-weight: bold;
+	background-color: #007bc0;
+	color: white;
+	border-radius: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+}
+
+.btSave:hover {
+	filter: brightness(120%);
+	transform: scale(1.02);
+}
+
+.tModal {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.tModal h2 {
+	padding: 0;
+	margin: 0;
+}
+
+.fields {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.inpLink {
+	width: 95%;
+	background-color: white;
+	color: black;
+	font-size: 18px;
+	height: 35px;
+	outline: 0;
+	padding-left: 10px;
+	border: 0;
+	border-top: 1px solid #575757;
+	border-bottom: 1px solid #575757;
+	border-left: 1px solid #575757;
+	border-radius: 8px 0 0 8px;
+}
+
+.btOk {
+	height: 38px;
+	border: 1px solid #575757;
+	border-radius: 0 8px 8px 0;
+	background-color: #007bc0;
+	color: white;
+	font-weight: bold;
+	cursor: pointer;
+	transition: all 0.1s ease-in-out;
+}
+
+.btOk:hover {
+	filter: brightness(120%);
+}

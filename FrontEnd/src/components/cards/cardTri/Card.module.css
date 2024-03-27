@@ -1,0 +1,109 @@
+  .contTri {
+    height: 315px;
+    width: 520px;
+    background-color: #003253;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .imgMask {
+    overflow: hidden;
+    height: 315px;
+    width: 520px;
+    border-radius: 8px;
+    position: absolute;
+    display: flex;
+    background-color: #000000;
+    z-index: 1;
+    display: block;
+  }
+  
+  .imgMask img {
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+  }
+  
+  .details {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .details h1,
+  p {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .front {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    /* display: none; */
+    flex-direction: column;
+    align-items: start;
+    justify-content: end;
+  }
+  
+  .infosF {
+    padding: 10%;
+  }
+  
+  .back {
+    width: 100%;
+    height: 100%;
+    /* display: flex; */
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+  }
+  
+  .infosB{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 45%;
+  }
+
+  .contmib{
+    width: 80%;
+    height: 35%;
+    display: flex;
+    align-items: end;
+    justify-content: start;
+  }
+
+  .mInfosB{
+    padding: 5%;
+    background-color: #791d73;
+    border-radius: 4px;
+  }
+
+  .progress {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    align-items: end;
+  }
+
+  .details:hover .front {
+    display: none;
+  }
+
+  .details:hover .back {
+    display: flex;
+  }
+
+  .contTri:hover .imgMask{
+    display: none;
+  }
