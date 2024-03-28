@@ -20,6 +20,21 @@ import HubTeams from "./Pages/admin/hubs/hub-TEAMS/HubTeams.jsx";
 import MakeTri from "./Pages/admin/makeTri/MakeTri.jsx";
 import TurmaCri from "./Pages/admin/TurmaCri/TurmaCri.jsx";
 
+const ProtectedRoute = ({ element, allowedUserTypes }) => {
+	const token = localStorage.getItem('access_token');
+
+	if (!token) {
+		return <Navigate to="/" />;
+	} else {
+		const decodedToken = jwtDecode(token);
+		if (allowedUserTypes.includes(decodedToken.tipo_user)) {
+			return element;
+		} else {
+			return <Navigate to="/fdt/trilhas" />;
+		}
+	}
+
+};
 
 const Router = () => {
 	return (
@@ -33,15 +48,15 @@ const Router = () => {
 				<Route element={<Cadastro />} path="/cadastro" />
 				<Route element={<CadastroAdm />} path="/cadastroadmin" />
 				<Route element={<CadMassa />} path="/cadastroemmassa" />
-	
+
 				<Route element={<HubADM />} path="/admin" />
 				<Route element={<HubCad />} path="/cadastros" />
 				<Route element={<HubTri />} path="/trilhas" />
 				<Route element={<HubTCri />} path="/trilhascriadas" />
-				<Route element={<HubTeam/>} path="/team" />
-				<Route element={<HubTeams/>} path="/teams" />
+				<Route element={<HubTeam />} path="/team" />
+				<Route element={<HubTeams />} path="/teams" />
 
-				<Route element={<TurmaCri/>} path="/criartime"/>
+				<Route element={<TurmaCri />} path="/criartime" />
 				<Route element={<MakeTri />} path="/criartrilha" />
 			</Routes>
 		</BrowserRouter>

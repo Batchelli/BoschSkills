@@ -121,7 +121,7 @@ export const Fpassword = () => {
 				<div className={styles.input}>
 					<MdEmail size={20} className={styles.icon} />
 					<div className={styles.line}></div>
-					<input type="text" class={styles.teste} maxLength="4" />
+					<input type="text" class={styles.teste}/>
 				</div>
 				<br></br>
 				<button onClick={confirmeCode}> CONFIRMAR CÓDIGO</button>

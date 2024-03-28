@@ -12,7 +12,6 @@ const Input = ({ id, type, value, onChange, name, placeholder, label, max }) => 
         onChange={onChange}
         name={name}
         placeholder={placeholder}
-        maxlength={max}
       />
       <label htmlFor={id} id={styles.ph1} className={styles.placeholder}>
         {label}

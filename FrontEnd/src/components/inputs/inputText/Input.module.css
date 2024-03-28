@@ -9,13 +9,12 @@
 
 .input {
   border: 0;
+  outline: 0;
   background-color: white;
   color: black;
   font-size: 18px;
   height: 100%;
-  outline: 0;
   width: 95%;
-  padding-left: 10px;
 }
 
 .placeholder {
@@ -27,7 +26,7 @@
   position: absolute;
   transform-origin: 0 50%;
   transition: transform 100ms, color 100ms;
-  top: 20px;
+  top: 23px;
   background-color: white;
 }
 

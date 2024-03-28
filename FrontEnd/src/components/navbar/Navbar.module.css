@@ -87,3 +87,8 @@
 	margin: 0;
 }
 
+@media only screen and (max-width: 460px){
+	.bts{
+		width: 200px;
+	}
+  }

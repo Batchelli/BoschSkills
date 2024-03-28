@@ -19,6 +19,9 @@ import { storage } from "../../firebase";
 import InputImg from "../inputs/inputImg/InputImg";
 import Input from "../inputs/inputText/Input";
 
+import Trilha from "../../Pages/user/trilha/Trilha"
+import ShowTri from "../showTri/ShowTri";
+
 const CriarTri = () => {
 	const [elements, setElements] = useState([]);
 	const [novoTitulo, setNovoTitulo] = useState("");
@@ -36,10 +39,22 @@ const CriarTri = () => {
 
 	const showAsTri = () => {
 		setShowTri(true)
+		localStorage.setItem("trilha", JSON.stringify(elements));
+		localStorage.setItem("nome", nome)
+		localStorage.setItem("desc", desc)
+		localStorage.setItem("focal", focal_point)
+		localStorage.setItem("ch", cargaHora)
+		localStorage.setItem("imagem", image)
 	}
 
 	const showAsNormal = () => {
 		setShowTri(false)
+		localStorage.removeItem("trilha");
+		localStorage.removeItem("nome");
+		localStorage.removeItem("desc");
+		localStorage.removeItem("focal");
+		localStorage.removeItem("ch");
+		localStorage.removeItem("imagem");
 	}
 
 	const addElemento = () => {
@@ -150,6 +165,8 @@ const CriarTri = () => {
 				}
 			);
 			toast.success("Trilha criada com sucesso.", { position: "top-right" });
+
+			setShowTri(false)
 		} catch (error) {
 			console.error("Erro ao enviar dados:", error);
 			toast.error("Erro ao criar a trilha. Tente novamente mais tarde.", { position: "top-right" });
@@ -197,62 +214,74 @@ const CriarTri = () => {
 			{showLinkModal && (
 				<LinkModal onClose={closeLinkModal} onSave={saveLink} />
 			)}
-			<div className={styles.contHeader}>
-				<div className={styles.contImg}>
-					<InputImg
-						onChange={setArquivo}
-						onClick={getArquivo}
-						id="fileInput"
-						image={image}
-					/>
-				</div>
-				<div className={styles.contInps}>
-					<div className={styles.inputs}>
-						<div className={styles.inps}>
-							<Input
-								placeholder="Titulo:"
-								onChange={(e) => setNome(e.target.value)}
-							/>
-						</div>
-					</div>
-					<div className={styles.descH}>
-						<textarea
-							className={styles.desc}
-							placeholder="Adicionar breve descrição da trilha"
-							type="text"
-							onChange={(e) => setDesc(e.target.value)}
+			{showTri == false && (
+				<div className={styles.contHeader}>
+					<div className={styles.contImg}>
+						<InputImg
+							onChange={setArquivo}
+							onClick={getArquivo}
+							id="fileInput"
+							image={image}
 						/>
 					</div>
-					<div className={styles.inputs}>
-						<div className={styles.inps} id={styles.fp}>
-							<Input
-								placeholder="Focal Point:"
-								onChange={(e) => setFocal(e.target.value)}
+					<div className={styles.contInps}>
+						<div className={styles.inputs}>
+							<div className={styles.inps}>
+								<Input
+									placeholder="Titulo:"
+									type="text"
+									value={nome}
+									onChange={(e) => setNome(e.target.value)}
+									id="nome"
+								/>
+							</div>
+						</div>
+						<div className={styles.descH}>
+							<textarea
+								className={styles.desc}
+								placeholder="Adicionar breve descrição da trilha"
+								type="text"
+								onChange={(e) => setDesc(e.target.value)}
+								value={desc}
+								id="desc"
 							/>
 						</div>
-						<div className={styles.inps} id={styles.ch}>
-							<Input
-								placeholder="Carga Horária:"
-								type="number"
-								onChange={(e) => setCargaHora(e.target.value)}
-							/>
+						<div className={styles.inputs}>
+							<div className={styles.inps} id={styles.fp}>
+								<Input
+									placeholder="Focal Point:"
+									onChange={(e) => setFocal(e.target.value)}
+									type="text"
+									value={focal_point}
+									id="focalpoint"
+								/>
+							</div>
+							<div className={styles.inps} id={styles.ch}>
+								<Input
+									placeholder="Carga Horária:"
+									type="number"
+									onChange={(e) => setCargaHora(e.target.value)}
+									value={cargaHora}
+									id="cargaHora"
+								/>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<VerticalTimeline className={styles.tColor}>
-				{elements.map((elemento, index) => (
-					<VerticalTimelineElement
-						key={index}
-						contentStyle={{
-							background: "#007BC0",
-							color: "#fff",
-							boxShadow: "0px 0px 0px 0px",
-						}}
-						contentArrowStyle={{ borderRight: "7px solid #007BC0" }}
-						iconStyle={{ background: "#007BC0", color: "#fff" }}
-					>
-						{showTri == false && (
+			)}
+			{showTri == false && (
+				<VerticalTimeline className={styles.tColor}>
+					{elements.map((elemento, index) => (
+						<VerticalTimelineElement
+							key={index}
+							contentStyle={{
+								background: "#007BC0",
+								color: "#fff",
+								boxShadow: "0px 0px 0px 0px",
+							}}
+							contentArrowStyle={{ borderRight: "7px solid #007BC0" }}
+							iconStyle={{ background: "#007BC0", color: "#fff" }}
+						>
 							<div className={styles.contTitulos}>
 								<div className={styles.inpsTri}>
 									<Input
@@ -265,13 +294,11 @@ const CriarTri = () => {
 									/>
 								</div>
 							</div>
-						)}
 
-						{elemento.topicos.map((paragrafo, topicoIndex) => (
-							<div key={topicoIndex}>
-								<div className={styles.contItens}>
-									<div className={styles.ifLink}>
-										{showTri == false && (
+							{elemento.topicos.map((paragrafo, topicoIndex) => (
+								<div key={topicoIndex}>
+									<div className={styles.contItens}>
+										<div className={styles.ifLink}>
 											<div className={styles.inpsTri} id={styles.inpTop}>
 												<Input
 													className={styles.itens}
@@ -280,10 +307,8 @@ const CriarTri = () => {
 													onChange={(e) => setTextos(e, index, topicoIndex)}
 												/>
 											</div>
-										)}
-										{paragrafo.link && (
-											<div>
-												{showTri == false && (
+											{paragrafo.link && (
+												<div>
 													<button
 														className={styles.btLink}
 														onClick={() => openLinkModal(index, topicoIndex)}
@@ -293,11 +318,9 @@ const CriarTri = () => {
 															size={30}
 														/>
 													</button>
-												)}
-											</div>
-										)}
-									</div>
-									{showTri == false && (
+												</div>
+											)}
+										</div>
 										<div className={styles.check}>
 											<div className={styles.cLink}>
 												<input
@@ -321,11 +344,9 @@ const CriarTri = () => {
 												</div>
 											</div>
 										</div>
-									)}
+									</div>
 								</div>
-							</div>
-						))}
-						{showTri == false && (
+							))}
 							<div className={styles.contBtAdd}>
 								<button
 									className={styles.btAddItem}
@@ -334,42 +355,46 @@ const CriarTri = () => {
 									+
 								</button>
 							</div>
-						)}
-						<div className={styles.textsTri}>
-							<h1>{elemento.titulo}</h1>
-						</div>
-						{elemento.topicos.map((paragrafo, topicoIndex) => (
-							<li key={topicoIndex} className={styles.textsTri} id={styles.topicos}>
-								{paragrafo.link ? (
-									<a className={styles.links} href={paragrafo.link.toString()}>
-										{paragrafo.texto}
-									</a>
-								) : (
-									<span>{paragrafo.texto}</span>
-								)}
-							</li>
-						))}
-						<div className={styles.btShow}>
-							{showTri == true && (
-								<button onClick={showAsNormal}>Editar</button>
-							)}
-							{showTri == false && (
-								<button onClick={showAsTri}>Visualizar trilha</button>
-							)}
-						</div>
-					</VerticalTimelineElement>
-				))}
-				<div className={styles.bt}>
-					<button onClick={addElemento} className={styles.btAd}>
-						+
-					</button>
+							<div className={styles.textsTri}>
+								<h1>{elemento.titulo}</h1>
+							</div>
+							{elemento.topicos.map((paragrafo, topicoIndex) => (
+								<li key={topicoIndex} className={styles.textsTri} id={styles.topicos}>
+									{paragrafo.link ? (
+										<a className={styles.links} href={paragrafo.link.toString()}>
+											{paragrafo.texto}
+										</a>
+									) : (
+										<span>{paragrafo.texto}</span>
+									)}
+								</li>
+							))}
+						</VerticalTimelineElement>
+					))}
+					<div className={styles.bt}>
+						<button onClick={addElemento} className={styles.btAd}>
+							+
+						</button>
+					</div>
+				</VerticalTimeline>
+			)}
+			{showTri == true && (
+				<div className={styles.asTrail}>
+					<ShowTri showTrilha={showAsTri} />
 				</div>
-			</VerticalTimeline>
+			)}
 			<div className={styles.saveTri}>
+				{showTri == true && (
+					<button className={styles.btSave} onClick={showAsNormal} id={styles.asTri}>Voltar a edição</button>
+				)}
+				{showTri == false && (
+					<button className={styles.btSave} onClick={showAsTri} id={styles.asTri}>Visualizar como trilha</button>
+				)}
 				<button className={styles.btSave} onClick={enviarDados}>
 					Salvar Trilha
 				</button>
 			</div>
+
 			<ToastContainer
 				position="top-right"
 				autoClose={4000}

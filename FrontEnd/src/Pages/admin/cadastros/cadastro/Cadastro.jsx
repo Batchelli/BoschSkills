@@ -80,7 +80,7 @@ const Cadastro = () => {
           </div>
           <div className={styles.inputs}>
             <div className={styles.dadosUser}>
-              <div className={styles.input}>
+              <div className={styles.input} id={styles.large}>
                 <FaUser size={20} className={styles.icon} />
                 <div className={styles.line}></div>
                 <Input
@@ -92,7 +92,7 @@ const Cadastro = () => {
                   onChange={(e) => setNome(e.target.value)}
                 />
               </div>
-              <div className={styles.input} id={styles.edv}>
+              <div className={styles.input} id={styles.small}>
                 <HiIdentification size={20} className={styles.icon} />
                 <div className={styles.line}></div>
                 <Input
@@ -106,8 +106,8 @@ const Cadastro = () => {
               </div>
             </div>
 
-            <div className={styles.dadosUser}>
-              <div className={styles.input} id={styles.fp}>
+            <div className={styles.dadosUser} >
+              <div className={styles.input} id={styles.large}>
                 <FaUserTie size={20} className={styles.icon} />
                 <div className={styles.line}></div>
                 <Input
@@ -119,7 +119,7 @@ const Cadastro = () => {
                   onChange={(e) => setFocal(e.target.value)}
                 />
               </div>
-              <div className={styles.input} id={styles.area}>
+              <div className={styles.input} id={styles.small}>
                 <FaGear size={20} className={styles.icon} />
                 <div className={styles.line}></div>
                 <Input

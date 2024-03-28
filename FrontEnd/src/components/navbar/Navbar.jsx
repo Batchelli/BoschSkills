@@ -2,8 +2,6 @@ import React from "react";
 import styles from "./Navbar.module.css";
 import { useNavigate, Link } from "react-router-dom";
 
-import { RxExit } from "react-icons/rx";
-
 const Navbar = () => {
 	const navigate = useNavigate();
 
@@ -28,7 +26,6 @@ const Navbar = () => {
 						</button>
 						<button className={styles.btEx} onClick={Sair}>
 							<h1>Sair </h1>
-							<RxExit size={20}/>
 						</button>
 					</div>
 				</div>

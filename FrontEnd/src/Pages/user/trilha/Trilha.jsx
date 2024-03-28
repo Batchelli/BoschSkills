@@ -1,8 +1,6 @@
 import Navbar from "../../../components/navbar/Navbar";
 import styles from "./Trilha.module.css";
 
-import Input from "../../../components/inputs/inputText/Input";
-
 import axios from "axios";
 import api from "../../../api";
 import React, { useState, useEffect } from "react";
@@ -26,7 +24,7 @@ const Trilha = () => {
 
   const get_data = async () => {
     try {
-      const response = await axios.get(`${api}/api/v1/trail/trails_creator/92901`);
+      const response = await axios.get(`${api}/api/v1/trail/trails_creator/929012`);
       console.log("OI oi");
       if (response.data) {
         console.log(response.data);
@@ -125,7 +123,7 @@ const Trilha = () => {
                 {elemento.topicos.map((topico, topicoIndex) => (
                   <li key={topicoIndex} className={styles.textsTri} id={styles.topicos}>
                     {topico.link ? (
-                      <a href={topico.link} className={styles.links}>{topico.texto}</a>
+                      <a href={topico.link} target="_blank" className={styles.links}>{topico.texto}</a>
                     ) : (
                       <span>{topico.texto}</span>
                     )}

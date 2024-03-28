@@ -26,7 +26,6 @@ const CadastroAdm = () => {
 
 	const cadastrationAdm = async (e) => {
 		e.preventDefault();
-		console.log("OI oi");
 	
 		if (!nome || !edv || !area || !email) {
 		  toast.error("Preencha todos os campos para ser feito o cadastro", {
@@ -84,12 +83,12 @@ const CadastroAdm = () => {
 						</div>
 
 						<div className={styles.dadosUser}>
-							<div className={styles.input} id={styles.edv}>
+							<div className={styles.input} id={styles.large}>
 								<HiIdentification size={20} className={styles.icon} />
 								<div className={styles.line}></div>
 								<Input label="Edv" type="number" id="edv" placeholder="" value={edv} onChange={(e) => setEdv(e.target.value)} />
 							</div>
-							<div className={styles.input} id={styles.area}>
+							<div className={styles.input} id={styles.small}>
 								<FaGear size={20} className={styles.icon} />
 								<div className={styles.line}></div>
 								<Input label="area" type="text" id="area" placeholder="" value={area} onChange={(e) => setArea(e.target.value)} />
