@@ -1,0 +1,153 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: column;
+}
+
+.cont {
+  margin: 15px 0px 15px 0px;
+  width: 90%;
+  max-width: 1300px;
+  height: 460px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.imgMask {
+  width: 60%;
+  height: 100%;
+  min-width: 700px;
+  max-width: 700px;
+  min-height: 460px;
+  
+  border-radius: 16px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.texts {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  width: 90%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+}
+
+.title h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 5px;
+  font-size: 28px;
+}
+
+.desc {
+  width: 90%;
+  height: auto;
+  max-height: 225px;
+  display: flex;
+  align-items: start;
+}
+
+
+.desc p {
+  margin: 0;
+  padding: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+}
+
+.infos {
+  width: 90%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.txt {
+  height: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.txt {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  margin: 0;
+  padding: 5px;
+}
+
+.links:hover {
+  color: #000000;
+  text-decoration: none;
+}
+
+.links {
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+}
+
+.links {
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+}
+
+.links:hover {
+  color: #000000;
+}
+
+.titles {
+  color: #fff;
+}
+
+.trilhaImg::before {
+  background-color: #aaaaaa73 !important;
+}
+
+.textsTri {
+  width: 100%;
+  word-break: break-all;
+}
+
+.contTri {
+  width: 100%;
+}
+
+#topicos {
+  padding-top: 8px;
+}
+
+@media only screen and (max-width: 1180px){
+  .cont{
+    flex-direction: column;
+    height: 960px;
+  }
+  .texts{
+    align-items: start;
+    width: 100%;
+  }
+
+  .imgMask{
+    max-width: 460px;
+  }
+}
+
+@media only screen and (max-width: 780px){
+  .imgMask{
+    min-width: 100%;
+  }
+}

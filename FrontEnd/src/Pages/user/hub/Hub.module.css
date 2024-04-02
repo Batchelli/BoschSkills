@@ -1,0 +1,31 @@
+.container {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: start;
+	flex-direction: column;
+}
+
+.trilhas {
+	width: 95%;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
+	gap: 24px;
+	padding: 10px 0;
+	justify-content: space-between;
+	align-items: center;
+	justify-items: center;
+}
+
+@media screen and (max-width: 1650px) {
+	.trilhas {
+		grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
+	}
+}
+
+@media screen and (max-width: 1150px) {
+	.trilhas {
+		grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));
+	}
+}

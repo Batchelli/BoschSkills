@@ -1,0 +1,94 @@
+.container {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	/* background-color: #003253; */
+	position: sticky;
+	background-image: linear-gradient(to right, #003253, #791d73);
+
+	top: 0;
+	z-index: 10;
+}
+
+.contFlex {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	width: 95%;
+}
+
+.logo {
+	padding: 5px 0 0 0;
+}
+
+.logo img {
+	width: 150px;
+}
+
+.contBt {
+	display: flex;
+	align-items: center;
+	justify-content: end;
+	height: 75px;
+	width: 100%;
+}
+
+.bts {
+	display: flex;
+	justify-content: space-around;
+	width: 300px;
+}
+
+.btTri {
+	height: 25px;
+	width: 150px;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	font-size: 10px;
+	border: 0;
+	background-color: transparent;
+	border-radius: 8px;
+	color: white;
+	transition: all 0.2s ease-in-out;
+	cursor: pointer;
+}
+
+.btTri:hover {
+	transform: scale(1.02);
+}
+
+.btEx {
+	height: 25px;
+	width: 80px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	font-size: 10px;
+	border: 0;
+	background-color: transparent;
+	border-radius: 8px;
+	color: #ffffff;
+	transition: all 0.2s ease-in-out;
+	cursor: pointer;
+}
+
+.btEx:hover {
+	transform: scale(1.02);
+}
+
+.btTri, h1{
+	padding: 0;
+	margin: 0;
+}
+
+.btEx, h1{
+	padding: 0;
+	margin: 0;
+}
+
+@media only screen and (max-width: 460px){
+	.bts{
+		width: 200px;
+	}
+  }

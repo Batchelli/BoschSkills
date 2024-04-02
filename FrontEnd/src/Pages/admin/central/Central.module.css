@@ -1,0 +1,78 @@
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.just {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.opsCont {
+    width: 90%;
+    height: 95%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.ttCont {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 35%;
+    min-width: 375px;
+    max-height: 490px;
+    height: 100%;
+    border: 1px solid #C6C6C6;
+    border-radius: 8px;
+}
+
+.btsOps {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    padding: 25px;
+    width: 80%;
+    height: 78%;
+    overflow: auto;
+}
+
+.btsOps::-webkit-scrollbar {
+    width: 0px;
+}
+
+.btsOps button {
+    width: 320px;
+    min-height: 75px;
+    height: 75px;
+    margin-bottom: 15px;
+    background-color: #E8F1FF;
+    border: 1px solid #C6C6C6;
+    border-radius: 4px;
+}
+
+.btsOps button:active {
+    background-color: red;
+}
+
+.btSend {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btSend button {
+    width: 200px;
+    height: 75px;
+}

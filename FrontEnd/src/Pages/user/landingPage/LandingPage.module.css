@@ -1,0 +1,214 @@
+.container {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.init {
+	height: 100vh;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.bg {
+	clip-path: polygon(0 0, 100% 0%, 100% 40%, 0% 100%);
+	background-image: repeating-linear-gradient(to right, #003253, #791d73);
+	height: 100vh;
+	width: 100%;
+	position: absolute;
+	z-index: -1;
+}
+
+.contSkills {
+	width: 90%;
+	height: 15%;
+	display: flex;
+	align-items: start;
+	justify-content: space-between;
+}
+
+.bsLogo {
+	display: flex;
+	align-items: center;
+}
+
+.bsLogo img {
+	width: 350px;
+}
+
+.bts {
+	height: 100%;
+}
+
+.bts button {
+	height: 50px;
+	width: 175px;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	font-size: 22px;
+	font-weight: bold;
+	border-radius: 8px;
+	border: 0;
+	background-color: #fff;
+	color: #791d73;
+	transition: all 0.2s ease-in-out;
+	cursor: pointer;
+}
+
+.bts button:hover {
+	filter: brightness(115%);
+	transform: scale(1.02);
+}
+
+.textsCont {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.textChama {
+	width: 450px;
+	height: 250px;
+	background-color: rgb(0, 0, 0, 0.8);
+	border-radius: 12px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	font-size: 52px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.textChama p {
+	margin: 0;
+	padding: 0;
+}
+.subText {
+	width: 425px;
+	font-size: 24px;
+	text-align: center;
+}
+
+.tri {
+	width: 100%;
+}
+
+.trilhaImg {
+	max-width: 1920px !important;
+}
+
+.trilhaImg h1 {
+	padding: 0;
+	margin: 0;
+}
+
+.trilhaImg::before {
+	width: 8px !important;
+	background-image: repeating-linear-gradient(
+		to top,
+		#791d73,
+		#003253
+	) !important;
+	left: 21px !important;
+	top: -30px !important;
+}
+
+.title {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: start;
+	padding-bottom: 25px;
+	padding-top: 10px;
+}
+
+.funcCont {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.funcInfos {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 275px;
+}
+
+.funcInfos img {
+	width: 125px;
+}
+
+.funcInfos h1,
+p {
+	margin: 0;
+	padding: 0;
+}
+
+.pInfo {
+	text-align: center;
+	width: 150px;
+}
+
+#docCont {
+	height: 350px;
+}
+
+#pDoc {
+	width: 250px;
+}
+
+#pDoc p {
+	font-size: 18px;
+}
+
+#imgDoc img {
+	width: 275px;
+	border: 10px solid black;
+	border-radius: 16px;
+}
+
+#persoImg img {
+	border-radius: 18px;
+	width: 175px;
+}
+
+.fBts {
+	height: 175px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.fButton {
+	height: 100px;
+	width: 300px;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	font-size: 42px;
+	font-weight: bold;
+	border-radius: 8px;
+	border: 0;
+	background-image: linear-gradient(to right, #003253, #791d73);
+	color: white;
+	transition: all 0.2s ease-in-out;
+}
+
+.fButton:hover {
+	filter: brightness(120%);
+	background-image: linear-gradient(to right, #791d73, #003253);
+	transform: scale(1.02);
+	cursor: pointer;
+}
