@@ -57,7 +57,7 @@ const Login = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.contLogin}>
+      <form onSubmit={loginUser} className={styles.contLogin}>
         <div className={styles.logo}>
           <img src={lSkills} alt="logo" />
         </div>
@@ -93,11 +93,11 @@ const Login = () => {
           </p>
         </div>
         <div className={styles.bts}>
-          <button className={styles.bt} onClick={loginUser}>
+          <button className={styles.bt}>
             <h1>Entrar</h1>
           </button>
         </div>
-      </div>
+      </form>
       <ToastContainer
         position="top-right"
         autoClose={900}

@@ -49,7 +49,7 @@
   padding: 2px;
   display: flex;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .dadosUser{
@@ -124,7 +124,7 @@ input[type=number]::-webkit-inner-spin-button {
 
 @media only screen and (max-width: 1350px) {
   .contLogin {
-    height: 350px;
+    height: 400px;
     width: 500px;
     padding: 50px;
   }

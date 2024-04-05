@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Central.module.css"
 import axios from "axios";
-import api from "../../../api";
+import { jwtDecode } from "jwt-decode";
 
+import api from "../../../api";
 import Navbar from "../../../components/navbar/Navbar"
 
 const Central = () => {
@@ -12,9 +13,12 @@ const Central = () => {
   const [centralTrail, setCentralTrail] = useState('')
   const [color, setColor] = useState('#fff')
 
+  const token = localStorage.getItem('token');
+	const decodedToken = jwtDecode(token);
+
   const team = async () => {
     try {
-      const response = await axios.get(`${api}/turmas/cTeamByEDV/92902660`)
+      const response = await axios.get(`${api}/turmas/cTeamByEDV/${decodedToken.edv}`)
       const teamData = response.data.map((item) => ({
         Nome: item.team_name || "N/A",
         Id: item.id || "N/A",
@@ -26,7 +30,7 @@ const Central = () => {
 
   const trail = async () => {
     try {
-      const response = await axios.get(`${api}/trail/trailsByCreator/92902660`)
+      const response = await axios.get(`${api}/trail/trailsByCreator/${decodedToken.edv}`)
       const trailData = response.data.map((item) => ({
         Nome: item.nome || "N/A",
         Id: item.id || "N/A",

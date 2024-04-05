@@ -32,7 +32,6 @@ const CriarTri = () => {
 	const [nome, setNome] = useState("");
 	const [desc, setDesc] = useState("");
 	const [focal_point, setFocal] = useState("");
-	const [criador_trilha, setCriador] = useState("");
 	const [cargaHora, setCargaHora] = useState("");
 	const [image, setImage] = useState(null);
 	const [imageUrl, setImageUrl] = useState(null);

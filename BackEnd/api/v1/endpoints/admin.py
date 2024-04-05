@@ -136,7 +136,7 @@ async def redArchive(file: UploadFile = File(...)):
         raise HTTPException(detail=str(e), status_code=500)
     
 #Faz o registro de apenas um usuário por vez na plataforma
-@router.post ('/singleRegisterUser', status_code = status.HTTP_201_CREATED, response_model= UserSchema)
+@router.post ('/singleRegister', status_code = status.HTTP_201_CREATED, response_model= UserSchema)
 async def post_user(user: UserSchema, db: AsyncSession = Depends(get_session)):
     """This route is to create a new user"""
     #Criptografa a senha do usuário, que no primeiro acesso é o edv
@@ -154,7 +154,7 @@ async def post_user(user: UserSchema, db: AsyncSession = Depends(get_session)):
                          focal_point= user.focal_point,
                          admin_email = user.admin_email,
                          percentage = user.percentage,
-                         typeUser = "User",
+                         typeUser = user.typeUser,
                          is_activate = False,
                          hashed_password = criptografia,
     )
@@ -163,27 +163,5 @@ async def post_user(user: UserSchema, db: AsyncSession = Depends(get_session)):
     await db.commit()
     return new_user
 
-#Faz o registro de um usuário administrador na plataforma
-@router.post ('/singleRegisterAdmin', status_code = status.HTTP_201_CREATED, response_model= AdminSchema)
-async def post_user(user: AdminSchema, db: AsyncSession = Depends(get_session)):
-    criptografia = password_encrypt(user.edv)
-    existing_user = await db.execute(select(UserModel).filter(UserModel.edv == user.edv))
-    if existing_user.scalar():
-        print("tem")
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="O EDV já esta em uso")
-
-    new_user = UserModel ( id = 0,
-                         name = user.name,
-                         edv = user.edv,
-                         email_user = user.email_user,
-                         user_area = user.user_area,
-                         typeUser = "Admin",
-                         is_activate = user.is_activate,
-                         hashed_password = criptografia,
-    )
-
-    db.add(new_user)
-    await db.commit()
-    return new_user
 
 

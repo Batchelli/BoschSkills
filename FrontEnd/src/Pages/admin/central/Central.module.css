@@ -36,6 +36,10 @@
     border-radius: 8px;
 }
 
+.ttCont h1{
+    color: #363636;
+}
+
 .btsOps {
     display: flex;
     flex-direction: column;

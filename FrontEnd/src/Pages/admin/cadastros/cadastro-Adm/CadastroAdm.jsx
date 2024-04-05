@@ -27,46 +27,49 @@ const CadastroAdm = () => {
 
 	const cadastrationAdm = async (e) => {
 		e.preventDefault();
-	
+
 		if (!nome || !edv || !area || !email) {
-		  toast.error("Preencha todos os campos para ser feito o cadastro", {
-			position: "top-right",
-			autoClose: 1800,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true,
-			progress: undefined,
-			theme: "light",
-		  });
-		  return;
+			toast.error("Preencha todos os campos para ser feito o cadastro", {
+				position: "top-right",
+				autoClose: 1800,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "light",
+			});
+			return;
 		}
-	
+
 		try {
-		  const NewUserAdm = await axios.post(`${api}/admin/singleRegisterAdmin`, {
-			name: nome,
-			edv: edv,
-			email_user: email,
-			user_area: area,
-			percentage: 0,
-			typeUser: "",
-			is_activate: 0,
-			hashed_password: edv,
-		  });
-		  toast.success("Cadastro de administrador feito com sucesso", {
-			position: "top-right",
-			autoClose: 1500,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true,
-			progress: undefined,
-			theme: "light",
-		  });
+			const NewUserAdm = await axios.post(`${api}/admin/singleRegister`, {
+				name: nome,
+				edv: edv,
+				email_user: email,
+				user_area: area,
+				focal_point: " ",
+				admin_email: " ",
+				percentage: 0,
+				typeUser: "Admin",
+				is_activate: 0,
+				hashed_password: edv,
+				image_user: " "
+			});
+			toast.success("Cadastro de administrador feito com sucesso", {
+				position: "top-right",
+				autoClose: 1500,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "light",
+			});
 		} catch (error) {
-		  console.error("Erro na requisição:", error);
+			console.error("Erro na requisição:", error);
 		}
-	  };
+	};
 
 	return (
 		<div className={styles.container}>
@@ -99,7 +102,7 @@ const CadastroAdm = () => {
 						<div className={styles.input}>
 							<MdEmail size={20} className={styles.icon} />
 							<div className={styles.line}></div>
-							<Input label="Email" type="text" id="emailFocal" placeholder="" value={email} onChange={(e) => setEmail(e.target.value)}/>
+							<Input label="Email" type="text" id="emailFocal" placeholder="" value={email} onChange={(e) => setEmail(e.target.value)} />
 						</div>
 					</div>
 
@@ -121,7 +124,7 @@ const CadastroAdm = () => {
 				draggable
 				pauseOnHover
 				theme="light"
-      		/>
+			/>
 		</div>
 	);
 };

@@ -43,7 +43,7 @@ const Cadastro = () => {
     }
 
     try {
-      const NewUserAdm = await axios.post(`${api}/admin/singleRegisterUser`, {
+      const NewUserAdm = await axios.post(`${api}/admin/singleRegister`, {
         name: nome,
         edv: edv,
         email_user: "",
@@ -51,10 +51,10 @@ const Cadastro = () => {
         focal_point: focal_point,
         admin_email: emailFocal,
         percentage: 0,
-        typeUser: "",
+        typeUser: "User",
         is_activate: 0,
         hashed_password: edv,
-        image_user: ""
+        image_user: " "
       });
       toast.success("Cadastro feito com sucesso", {
         position: "top-right",
