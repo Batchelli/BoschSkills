@@ -3,14 +3,14 @@ import pandas as pd
 from io import BytesIO
 from fastapi import File, UploadFile, HTTPException, APIRouter, status, Depends
 from fastapi.responses import JSONResponse
-from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, Boolean, Float
+from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, Boolean, Float, update
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session as BaseSession
 from passlib.hash import pbkdf2_sha256
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy import select
 from core.deps import get_session
-
+import re
 from models.users_model import *
 from schemas.users_schema import *
 
@@ -19,7 +19,7 @@ router = APIRouter()
 metadata = MetaData()
 
 
-colaboradores = Table(
+users = Table(
     'users', metadata,
     Column('id', Integer, primary_key=True),
     Column('name', String),
@@ -31,7 +31,8 @@ colaboradores = Table(
     Column('percentage', Float),
     Column('typeUser', String),
     Column('is_activate', Boolean),
-    Column('hashed_password', String)
+    Column('hashed_password', String),
+    Column('image_user', String)
 )
 
 import databases
@@ -49,10 +50,6 @@ async_engine = create_async_engine(str(db.url), echo=True)
 # Define sessionmaker with AsyncSession
 async_session = sessionmaker(async_engine, expire_on_commit=False, class_=AsyncSession)
 
-# Use run_sync() to create tables synchronously
-
-
-# Now you can use async_session to create async sessions
 
 #Função para criptografar a senha dos usuários
 def password_encrypt(password):
@@ -62,61 +59,57 @@ def password_encrypt(password):
 
 #Função para ler todas as seguintes colunas de um arquivo excel:
 def lerXml(df):
-    df['hashed_password'] = df['edv'].apply(password_encrypt)
-    df['is_activate'] = True
-    df['percentage'] = 0
-    df['typeUser'] = "user"
+    df['hashed_password'] = df['Edv'].apply(password_encrypt)
     print(df)
     return df
 
 #Essa função faz a leitura do arquivo excel e insere no banco os novos usuários que existem nele
-@router.post("/cadXml/uploadfile/")
+@router.post("/uploadfile/")
 async def create_upload_file(file: UploadFile = File(...)):
-    """The fuction is to save a informations excel in data base"""
     try:
         content = await file.read()
         content_io = BytesIO(content)
         df = pd.read_excel(content_io)
-        print(df)
 
         df_processed = lerXml(df)
-        print("arquivo recebido", df_processed)
 
         async with async_session() as session:
-            print("gioabaaaaa")
-            # Iniciar uma transação
             async with session.begin():
-                # Inserir dados no banco de dados
-                for _, row in df_processed.iterrows():
-                    #Faz a verificação se algum edv da planilha já existe no banco de dados
-                    user_exists = await session.execute(select(colaboradores).where(colaboradores.c.edv == row['edv']))
-                    # user_exists ['image_user'] = ""
-                    #se não existir ele insere os usuários no banco de dados
-                    if not user_exists.scalar_one_or_none():
-                        user = colaboradores.insert().values(
-                            name=row['name'],
-                            edv=row['edv'],
-                            email_user=row['email_user'],
-                            user_area=row['user_area'],
-                            focal_point=row['focal_point'],
-                            admin_email=row['admin_email'],
-                            percentage=row['percentage'],
-                            typeUser=row['typeUser'],
-                            is_activate=row['is_activate'],
-                            hashed_password=row['hashed_password'],
-                            # image_user=row['']
-                            
-                           
-                        )
-                        await session.execute(user)
-                        print("tabela", colaboradores)
-                        
+                for _, row in df_processed.iterrows(): 
+                    if not re.match(r'^\d{8}$', str(row['Edv'])):
+                        return JSONResponse(content={"error": "O EDV deve conter exatamente 8 dígitos"}, status_code=400)
+
+                    user = await session.execute(select(users).where(users.c.edv == row['Edv']))
+                    existing_user = user.fetchone()
+
+                    if existing_user:
+                        existing_user_data = dict(existing_user)
+                        update_data = {column: row[column] for column in df_processed.columns if column in existing_user_data and existing_user_data[column] != row[column]}
+
+                        if update_data:
+                            await session.execute(update(users).where(users.c.edv == row['Edv']).values(**update_data))
+
                     else:
-                        return JSONResponse(content={"message": f"The user with the edv: {row['edv']} already exists in database, please remove it from the table to be added to the new users"}, status_code=200)
-                            
-        return JSONResponse(content={"message": "Archive process sucess"}, status_code=200)
+                        await session.execute(users.insert().values(
+                            name=row['Nome'],
+                            edv=row['Edv'],
+                            user_area=row['Area'],
+                            focal_point=row['Focal Point'],
+                            admin_email=row['Email do responsavel'],
+                            hashed_password=row['hashed_password'],
+                            typeUser='User',
+                            is_activate=0,
+                            percentage=0,
+                            email_user='',
+                            image_user='',
+                        ))
+            await session.commit()
+
+        return JSONResponse(content={"message": "Arquivo processado com sucesso"}, status_code=200)
+
     except Exception as e:
-        return HTTPException(detail=str(e), status_code=500)
+        return JSONResponse(content={"error": str(e)}, status_code=500)
+    
 
 #Exibe todas as informações contidas na planilha do excel para que possa ser feita a visualização antes de enviar
 @router.post("/cadXml/previewfile/")
@@ -128,7 +121,7 @@ async def redArchive(file: UploadFile = File(...)):
         df.columns = df.columns.str.lower()
         df['is_activate'] = True
         df['is_activate'] = df['is_activate'].astype(bool)
-        df.rename(columns={'name': 'name', 'edv': 'edv', 'user_area': 'user_area', 'focal_point': 'focal_point', 'admin_email': 'admin_email'}, inplace=True)
+        df.rename(columns={'name': 'Nome', 'edv': 'Edv', 'user_area': 'Area', 'focal_point': 'Focal Point', 'admin_email': 'Email do responsavel'}, inplace=True)
         print(df.to_dict(orient='records'))
         
         return df.to_dict(orient='records')

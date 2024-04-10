@@ -1,7 +1,7 @@
 #Este arquivo contém a models da tabela Central
 from core.configs import settings
 from sqlalchemy import Column, Integer, String, ForeignKey
-from models.team_model import *
+from models.users_team_model import *
 from models.trails_model import *
 from models.users_model import *
 
@@ -13,3 +13,4 @@ class Central(settings.DBBaseModel):
     team_id = Column(Integer, ForeignKey('CreateTeam.id')) 
     percentage = Column(Integer)
     
+

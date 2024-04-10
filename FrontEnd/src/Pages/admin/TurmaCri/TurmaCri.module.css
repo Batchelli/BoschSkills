@@ -8,7 +8,140 @@
 	margin-bottom: 5%;
 }
 
+.body {
+	width: 95%;
+	height: 100%;
+	padding: 35px 0px 35px 0px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.inputs {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 35px;
+}
+
 .contImg {
 	width: 225px;
 	height: 225px;
+}
+
+.inpTxt {
+	margin-left: 25px;
+	border: 1px solid black;
+	border-radius: 8px;
+	width: 400px;
+	height: 50px;
+	padding: 2px;
+}
+
+.ttCont {
+	background-color: #fff;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 80%;
+	padding: 10px;
+	max-height: 490px;
+	height: 100%;
+	border: 1px solid #C6C6C6;
+	border-radius: 8px;
+	margin-bottom: 35px;
+}
+
+.ttCont h1 {
+	color: #363636;
+}
+
+.btsOps {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: start;
+	padding: 0px 25px 0px 25px;
+	width: 100%;
+	height: 78%;
+	overflow: auto;
+}
+
+.btsOps::-webkit-scrollbar {
+	width: 0px;
+}
+
+.search {
+	width: 80%;
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	justify-content: center;
+	margin-bottom: 15px;
+}
+
+.inpPes {
+	border: 1px solid black;
+	border-radius: 4px;
+	height: 25px;
+	width: 100%;
+	padding: 2px;
+}
+
+.btUser {
+	display: flex;
+	align-items: center;
+	width: 95%;
+	min-height: 35px;
+	height: 75px;
+	margin-bottom: 5px;
+	background-color: #E8F1FF;
+	border: 1px solid #C6C6C6;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.btUser:hover{
+	filter: brightness(105%);
+	background-color: #8caad8;
+}
+
+.btSelectUser {
+	display: flex;
+	align-items: center;
+	width: 95%;
+	min-height: 35px;
+	height: 75px;
+	margin-bottom: 5px;
+	background-color: #8caad8;
+	border: 1px solid #C6C6C6;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.bt{
+	width: 85%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.bt button{
+	height: 60px;
+	width: 175px;
+	color: #fff;
+	font-size: 18px;
+	font-weight: bold;
+	background-image: linear-gradient(to right, #003253, #791d73);
+	border: 0;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 0.2s ease-out;
+}
+
+.bt button:hover{
+	transform: scale(1.01);
+	filter: brightness(115%);
 }

@@ -4,5 +4,5 @@ from pydantic import BaseModel as SchemaBaseModel
 class TeamSchema(SchemaBaseModel):
     id: Optional[int] = None
     team_id: int 
-    user_edv: int 
+    user_edv: List[int] 
     

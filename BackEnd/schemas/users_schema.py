@@ -18,18 +18,6 @@ class UserSchema(SchemaBaseModel):
     class Config:
         from_attributes = True
 
-class AdminSchema(SchemaBaseModel):
-    id: Optional[int] = None
-    name: str 
-    edv : int
-    email_user: str
-    user_area : str
-    typeUser: str 
-    is_activate : bool
-    hashed_password : str
-    class Config:
-        from_attributes = True
-
 class LoginSchema(SchemaBaseModel):
     username : str
     password : str

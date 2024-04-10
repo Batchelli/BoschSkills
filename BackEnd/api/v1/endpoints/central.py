@@ -7,13 +7,64 @@ from models.users_model import *
 from models.trails_model import *
 from models.create_team_model import *
 from models.central_model import *
+from models.users_team_model import *
 
 from schemas.central_schema import *
-from schemas.team_schema import *
+from schemas.users_team_schema import *
 
 from core.deps import get_session
 
 router = APIRouter()
+
+@router.post("/centralizedTeams/")
+async def add_users_to_central(data: CentralTeamSchema, db: AsyncSession = Depends(get_session)):
+    async with db as session:
+        create_team = await get_cteam_id(data.team_id, session)
+        if not create_team:
+            raise HTTPException(status_code=404, detail="Create team not found")
+
+        team = await get_team_id(create_team.id, session)
+        if not team:
+            raise HTTPException(status_code=404, detail="Team not found")
+
+        team_users = await get_user_edv(create_team.id, session)
+
+        if not team_users:
+            raise HTTPException(status_code=404, detail="No users found in the team")
+
+        for user in team_users:
+            central_entry = Central(
+                user_edv=user.edv,
+                trail_id=data.trail_id,
+                team_id=data.team_id,
+                percentage=0 
+            )
+            session.add(central_entry)
+
+        await session.commit()
+
+        return {"message": "Users added to central successfully"}
+
+async def get_cteam_id(create_team_id: int, session: AsyncSession):
+    print(create_team_id)
+    query = select(CreateTeam).filter(CreateTeam.id == create_team_id)
+    result = await session.execute(query)
+    print("cheguei aqui")
+    return result.scalar_one_or_none()
+
+async def get_team_id(team_id: int, session: AsyncSession):
+    print(team_id)
+    query = select(Team).filter(Team.id == team_id)
+    result = await session.execute(query)
+    print("cheguei aqui")
+    return result.scalar_one_or_none()
+
+async def get_user_edv(create_team_id: int, session: AsyncSession):
+    print(create_team_id)
+    query = select(UserModel).select_from(Team).filter(Team.user_edv == UserModel.edv, Team.team_id == create_team_id)
+    print("cheguei aqui")
+    result = await session.execute(query)
+    return result.scalars().all()
 
 @router.post("/centralizer/")
 async def create_central_entry(data: CentralSchema, db: AsyncSession = Depends(get_session)):
@@ -60,50 +111,6 @@ async def get_created_team_by_id(team_id: int, session: AsyncSession):
     result = await session.execute(query)
     return result.scalar_one_or_none()
 
-@router.post("/centralizedTeams/{create_team_id}/{trail_id}")
-async def add_users_to_central(create_team_id: int, trail_id: int, db: AsyncSession = Depends(get_session)):
-    async with db as session:
-
-        create_team = await get_cteam_id(create_team_id, session)
-        if not create_team:
-            raise HTTPException(status_code=404, detail="Create team not found")
-
-        team = await get_team_id(create_team.id, session)
-        if not team:
-            raise HTTPException(status_code=404, detail="Team not found")
-
-        team_users = await get_user_edv(create_team.id, session)
-
-        if not team_users:
-            raise HTTPException(status_code=404, detail="No users found in the team")
-
-        for user in team_users:
-            central_entry = Central(
-                user_edv=user.edv,
-                trail_id=trail_id,
-                team_id=team.id,
-                percentage=0 
-            )
-            session.add(central_entry)
-
-        await session.commit()
-
-        return {"message": "Users added to central successfully"}
-
-async def get_cteam_id(create_team_id: int, session: AsyncSession):
-    query = select(CreateTeam).filter(CreateTeam.id == create_team_id)
-    result = await session.execute(query)
-    return result.scalar_one_or_none()
-
-async def get_team_id(team_id: int, session: AsyncSession):
-    query = select(Team).filter(Team.id == team_id)
-    result = await session.execute(query)
-    return result.scalar_one_or_none()
-
-async def get_user_edv(create_team_id: int, session: AsyncSession):
-    query = select(UserModel).join(Team).filter(Team.user_edv == UserModel.edv, Team.team_id == create_team_id)
-    result = await session.execute(query)
-    return result.scalars().all()
 
 @router.get('/allCentral', response_model=List[CentralSchema])
 async def get_centrals(db: AsyncSession = Depends(get_session)):

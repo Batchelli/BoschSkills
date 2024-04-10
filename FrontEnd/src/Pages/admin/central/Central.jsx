@@ -11,10 +11,12 @@ const Central = () => {
   const [trailName, setTrailName] = useState([])
   const [centralTeam, setCentralTeam] = useState('')
   const [centralTrail, setCentralTrail] = useState('')
+  const [selectedTeams, setSetSelectedTeams] = useState([]);
+  const [selectedTrail, setSetSelectedTrail] = useState([]);
   const [color, setColor] = useState('#fff')
 
   const token = localStorage.getItem('token');
-	const decodedToken = jwtDecode(token);
+  const decodedToken = jwtDecode(token);
 
   const team = async () => {
     try {
@@ -40,11 +42,6 @@ const Central = () => {
     }
   }
 
-  const test = (e) => {
-    setCentralTrail(e.target.value)
-    setColor("#E8F1FF")
-  }
-
   const centralizer = async () => {
     try {
       const create = await axios.post(`${api}/central/centralizedTeams/${centralTeam}/${centralTrail}`, {})
@@ -60,26 +57,65 @@ const Central = () => {
     trail();
   }, [])
 
+  const toggleTeamSelection = (userId) => {
+    console.log("ID do usuário selecionado:", userId);
+    if (selectedTeams.includes(userId)) {
+      console.log("Removendo usuário:", userId);
+      setSetSelectedTeams([]);
+      setCentralTeam('')
+    } else {
+      console.log("Adicionando usuário:", userId);
+      setSetSelectedTeams([userId]);
+      setCentralTeam(userId)
+    }
+  };
+
+  const toggleTrailSelection = (userId) => {
+    console.log("ID do usuário selecionado:", userId);
+    if (selectedTrail.includes(userId)) {
+      console.log("Removendo usuário:", userId);
+      setSetSelectedTrail([]);
+      setCentralTrail('')
+    } else {
+      console.log("Adicionando usuário:", userId);
+      setSetSelectedTrail([userId]);
+      setCentralTrail(userId)
+    }
+  };
+
+  console.log("Selected Teams: ", selectedTeams);
+  console.log("Selected Trails: ", selectedTrail);
+
   return (
     <div className={styles.container}>
       <Navbar />
       <div className={styles.just}>
         <div className={styles.opsCont}>
           <div className={styles.ttCont}>
-            <h1>Suas Trilhas</h1>
+            <h1>Seus Times</h1>
             <div className={styles.btsOps}>
-              {trailName.map((item, index) => (
-                <button key={index} value={item.Id} onClick={test}>
+              {teamName.map((item, index) => (
+                <button
+                  key={index}
+                  value={item.Id}
+                  onClick={() => toggleTeamSelection(item.Id)}
+                  className={selectedTeams.includes(item.Id) ? styles.btSelectUser : styles.btUser}
+                >
                   {`${item.Nome}`}
                 </button>
               ))}
             </div>
           </div>
           <div className={styles.ttCont}>
-            <h1>Seus Times</h1>
+            <h1>Suas Trilhas</h1>
             <div className={styles.btsOps}>
-              {teamName.map((item, index) => (
-                <button key={index} value={item.Id} onClick={(e) => setCentralTeam(e.target.value)}>
+              {trailName.map((item, index) => (
+                <button
+                  key={index}
+                  value={item.Id}
+                  onClick={() => toggleTrailSelection(item.Id)}
+                  className={selectedTrail.includes(item.Id) ? styles.btSelectUser : styles.btUser}
+                >
                   {`${item.Nome}`}
                 </button>
               ))}

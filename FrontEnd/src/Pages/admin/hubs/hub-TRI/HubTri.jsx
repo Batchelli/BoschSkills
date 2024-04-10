@@ -18,18 +18,18 @@ const HubTri = () => {
 					path="skills/criartrilha"
 				/>
 				<CardsCad
-					title="Trilhas Criadas"
-					desc="Area destinada a visualização das trilhas que foram criadas por você."
+					title="Adicionar a Trilha"
+					desc="Area destinada a adição de usuários a trilha."
 					icon={TriIcon}
 					color="green"
-					path="skills/trilhascriadas"
+					path="skills/adicionar"
 				/>
 				<CardsCad
-					title="Trilhas Atreladas"
-					desc="Area destinada visualização de trilhas que foram atreladas a você."
+					title="Trilhas"
+					desc="Hub de trilhas criadas por você ou atrelada a você."
 					icon={TriIcon}
 					color="pink"
-					path="skills/hubtrilhasadm"
+					path="skills/trilhasEx"
 				/>
 			</section>
 		</div>

@@ -36,7 +36,7 @@
     border-radius: 8px;
 }
 
-.ttCont h1{
+.ttCont h1 {
     color: #363636;
 }
 
@@ -55,7 +55,7 @@
     width: 0px;
 }
 
-.btsOps button {
+.btUser {
     width: 320px;
     min-height: 75px;
     height: 75px;
@@ -63,11 +63,25 @@
     background-color: #E8F1FF;
     border: 1px solid #C6C6C6;
     border-radius: 4px;
+    cursor: pointer;
 }
 
-.btsOps button:active {
-    background-color: red;
+.btUser:hover {
+    filter: brightness(105%);
+    background-color: #9cbae9;
 }
+
+.btSelectUser {
+    width: 320px;
+    min-height: 75px;
+    height: 75px;
+    margin-bottom: 15px;
+    background-color: #8caad8;
+    border: 1px solid #C6C6C6;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
 
 .btSend {
     height: 100%;

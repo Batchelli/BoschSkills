@@ -140,7 +140,7 @@ const CriarTri = () => {
 			const blob = dataURLtoBlob(image);
 			const tituloPadronizado = generateImageTitle("jpg");
 			const file = new File([blob], tituloPadronizado, { type: "image/jpeg" });
-			const imageRef = ref(storage, `images/${tituloPadronizado}`);
+			const imageRef = ref(storage, `Imagens/Trilha/${tituloPadronizado}`);
 
 			await uploadBytes(imageRef, file);
 			const url = await getDownloadURL(imageRef);

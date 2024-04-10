@@ -8,7 +8,7 @@ from core.configs import settings
 from core.database import engine
 from models.trails_model import Trail
 from models.create_team_model import CreateTeam
-from models.team_model import Team
+from models.users_team_model import Team
 from models.users_model import User
 from models.central_model import Central
 

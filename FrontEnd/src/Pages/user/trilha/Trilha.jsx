@@ -24,7 +24,7 @@ const Trilha = () => {
 
   const get_data = async () => {
     try {
-      const response = await axios.get(`${api}/trail/trails_creator/929012`);
+      const response = await axios.get(`${api}/trail/trails_creator/92902661`);
       console.log("OI oi");
       if (response.data) {
         console.log(response.data);

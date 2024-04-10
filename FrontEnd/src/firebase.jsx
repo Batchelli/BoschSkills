@@ -1,17 +1,17 @@
 import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyB4SWDExikiDovK-NIU1aAR8q83hEX2WpE",
-    authDomain: "bosch-skills.firebaseapp.com",
-    projectId: "bosch-skills",
-    storageBucket: "bosch-skills.appspot.com",
-    messagingSenderId: "909770880839",
-    appId: "1:909770880839:web:6a2bb420072e36205bbe62",
-    measurementId: "G-LG5NTJRMC1"
-  };
-  
-  // Initialize Firebase
-  export const app = initializeApp(firebaseConfig);
-  export const storage = getStorage(app);
-  
+  apiKey: "AIzaSyALNipn4ZFmxfwIeqky8wT6fIs7lBSuwMY",
+  authDomain: "boschskills-2024.firebaseapp.com",
+  projectId: "boschskills-2024",
+  storageBucket: "boschskills-2024.appspot.com",
+  messagingSenderId: "506505528202",
+  appId: "1:506505528202:web:02f7afc8360bb3d8c1be73",
+  measurementId: "G-PLVGLYNQB2"
+};
+
+const app = initializeApp(firebaseConfig);
+export const storage = getStorage(app);
+const analytics = getAnalytics(app);

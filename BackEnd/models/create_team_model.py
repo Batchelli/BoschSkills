@@ -7,6 +7,5 @@ class CreateTeam(settings.DBBaseModel):
     id = Column(Integer, primary_key=True, autoincrement=True)
     lider = Column(String(100))
     team_name = Column(String(100))
-    image_team : str = Column (String(9000))
-
+    image_team = Column (String(9000))
 

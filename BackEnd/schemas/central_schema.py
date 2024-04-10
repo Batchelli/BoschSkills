@@ -8,3 +8,7 @@ class CentralSchema(SchemaBaseModel):
     team_id: int
     percentage: int
   
+class CentralTeamSchema(SchemaBaseModel):
+    id: Optional[int] = None
+    trail_id: int
+    team_id: int

@@ -1,10 +1,13 @@
 #Se trata do models da tabela team
 from core.configs import settings
 from sqlalchemy import Column, Integer, ForeignKey, String
+from sqlalchemy.dialects.postgresql import JSON
+
 
 class Team(settings.DBBaseModel):
-    __tablename__ = "Team"
+    __tablename__ = "UsersTeam"
     id = Column(Integer, primary_key=True, autoincrement=True)
-    user_edv = Column(Integer, ForeignKey('Users.edv'))
-    team_id = Column(Integer, ForeignKey('Team.id'))
+    team_id = Column(Integer, ForeignKey('CreateTeam.id'))
+    user_edv = Column(JSON)
+
     
