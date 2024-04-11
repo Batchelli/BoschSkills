@@ -94,8 +94,8 @@ async def create_upload_file(file: UploadFile = File(...)):
                             name=row['Nome'],
                             edv=row['Edv'],
                             user_area=row['Area'],
-                            focal_point=row['Focal Point'],
-                            admin_email=row['Email do responsavel'],
+                            focal_point=row['Focal_Point'],
+                            admin_email=row['Email_Gestor'],
                             hashed_password=row['hashed_password'],
                             typeUser='User',
                             is_activate=0,
@@ -121,7 +121,7 @@ async def redArchive(file: UploadFile = File(...)):
         df.columns = df.columns.str.lower()
         df['is_activate'] = True
         df['is_activate'] = df['is_activate'].astype(bool)
-        df.rename(columns={'name': 'Nome', 'edv': 'Edv', 'user_area': 'Area', 'focal_point': 'Focal Point', 'admin_email': 'Email do responsavel'}, inplace=True)
+        df.rename(columns={'name': 'Nome', 'edv': 'Edv', 'user_area': 'Area', 'focal_point': 'Focal_Point', 'admin_email': 'Email_Gestor'}, inplace=True)
         print(df.to_dict(orient='records'))
         
         return df.to_dict(orient='records')

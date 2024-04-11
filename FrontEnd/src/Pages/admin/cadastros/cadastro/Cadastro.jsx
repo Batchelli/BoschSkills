@@ -11,10 +11,8 @@ import { MdEmail } from "react-icons/md";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import Navbar from "../../../../components/navbar/Navbar";
 import api from "../../../../api";
-
 import lSkill from "../../../../components/assets/logoSkill-B.svg"
 
 const Cadastro = () => {
@@ -24,6 +22,8 @@ const Cadastro = () => {
   const [area, setArea] = useState("");
   const [focal_point, setFocal] = useState("");
   const [emailFocal, setEmailFocal] = useState("");
+
+  const color = localStorage.getItem("color")
 
   const cadastration = async (e) => {
     e.preventDefault();
@@ -72,7 +72,7 @@ const Cadastro = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} style={{backgroundColor: color}}>
       <Navbar />
       <form onSubmit={cadastration} className={styles.contJust}>
         <div className={styles.contLogin}>

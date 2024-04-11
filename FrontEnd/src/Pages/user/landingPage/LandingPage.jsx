@@ -1,35 +1,55 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./LandingPage.module.css";
-
 import { useNavigate } from "react-router-dom";
-
+import { FaGears } from "react-icons/fa6";
+import { IoDocumentTextOutline } from "react-icons/io5";
+import { FaRegUser } from "react-icons/fa";
 import {
 	VerticalTimeline,
 	VerticalTimelineElement,
 } from "react-vertical-timeline-component";
+import { jwtDecode } from "jwt-decode";
 
-import { FaGears } from "react-icons/fa6";
-import { IoDocumentTextOutline } from "react-icons/io5";
-import { FaRegUser } from "react-icons/fa";
 
 const LandingPage = () => {
+	const [color, setColor] = useState("");
+
 	const navigate = useNavigate()
 
+	const token = localStorage.getItem('token');
+	const decodedToken = jwtDecode(token);
+	const isAdm = decodedToken.typeUser
+
 	const Logar = () => {
-		navigate("/skills/login");
+		if (token) {
+			if (isAdm == "SAdmin" || isAdm == "Admin") {
+				navigate("/skills/hubadmin");
+			} else {
+				navigate("/skills/hubtrilhas");
+			}
+		} else {
+			navigate("/skills/login")
+		}
 	};
 
+	useEffect(() => {
+		const colors = ["#007BC0", "#18837E", "#9E2896"];
+		const randomColor = colors[Math.floor(Math.random() * colors.length)];
+		setColor(randomColor);
+	}, []);
+	localStorage.setItem('color', color)
+	console.log(color)
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.init}>
-				<div className={styles.bg}></div>
+				<div className={styles.bg} style={{ backgroundColor: color }}></div>
 				<div className={styles.contSkills}>
 					<div className={styles.bsLogo}>
 						<img src="src\components\assets\logoSkill-W.svg" alt="" />
 					</div>
 					<div className={styles.bts}>
-						<button onClick={Logar}>Entrar</button>
+						<button style={{ color: color }} onClick={Logar}>Entrar</button>
 					</div>
 				</div>
 				<div className={styles.textsCont}>
@@ -43,7 +63,11 @@ const LandingPage = () => {
 			</div>
 
 			<div className={styles.tri}>
-				<VerticalTimeline className={styles.trilhaImg} layout={"1-column-left"}>
+				<VerticalTimeline
+					className={styles.trilhaImg}
+					layout={"1-column-left"}
+					lineColor={color}
+				>
 					<VerticalTimelineElement
 						contentStyle={{
 							background: "#fff",
@@ -58,9 +82,9 @@ const LandingPage = () => {
 							height: 50,
 							zIndex: 10,
 						}}
-						icon={<FaGears color="#003253" />}
+						icon={<FaGears color={color} />}
 					>
-						<div className={styles.title} style={{ color: "#003253" }}>
+						<div className={styles.title} style={{ color: color }}>
 							<h1>Funcionalidades</h1>
 						</div>
 						<div className={styles.funcCont}>
@@ -104,9 +128,9 @@ const LandingPage = () => {
 							height: 50,
 							zIndex: 10,
 						}}
-						icon={<IoDocumentTextOutline color="#2C2A5E" />}
+						icon={<IoDocumentTextOutline color={color} />}
 					>
-						<div className={styles.title} style={{ color: "#2C2A5E" }}>
+						<div className={styles.title} style={{ color: color }}>
 							<h1>Documentação</h1>
 						</div>
 						<div className={styles.funcCont} id={styles.docCont}>
@@ -135,9 +159,9 @@ const LandingPage = () => {
 							height: 50,
 							zIndex: 10,
 						}}
-						icon={<FaRegUser color="#791d73" />}
+						icon={<FaRegUser color={color} />}
 					>
-						<div className={styles.title} style={{ color: "#791d73" }}>
+						<div className={styles.title} style={{ color: color }}>
 							<h1>Desenvolvedores</h1>
 						</div>
 						<div className={styles.funcCont}>
@@ -168,13 +192,6 @@ const LandingPage = () => {
 					</VerticalTimelineElement>
 				</VerticalTimeline>
 			</div>
-      <div className={styles.fBts}>
-        <button className={styles.fButton} onClick={Logar}>Entrar</button>
-      </div>
-			{/* <iframe
-				src="http://www.republiquedesmangues.fr/"
-				style={{ width: "99.8%", height: "100%" }}
-			></iframe> */}
 		</div>
 	);
 };

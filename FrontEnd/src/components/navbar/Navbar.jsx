@@ -1,35 +1,52 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Navbar.module.css";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import lSkills from "../assets/logoSkill-W.svg"
 
+import { jwtDecode } from "jwt-decode";
+
 
 const Navbar = () => {
-	const navigate = useNavigate();
+	const [showAdm, setShowAdm] = useState(false)
 
-	const Sair = () => {
-		navigate("/skills/login");
-	};
+	const color = localStorage.getItem('color');
+	const token = localStorage.getItem('token');
 
-	const Hub = () => {
-		navigate("/skills/hubTrilhas");
-	};
+	const decodedToken = jwtDecode(token);
+	const isAdm = decodedToken.typeUser
+
+	const setAdm = () => {
+		if (isAdm == "SAdmin" || isAdm == "Admin") {
+			setShowAdm(true)
+		} else {
+			setShowAdm(false)
+		}
+	}
+
+	useEffect(() => {
+		setAdm();
+	}, [])
+
 
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} style={{ backgroundColor: color }}>
 			<div className={styles.contFlex}>
 				<Link to="/" className={styles.logo}>
 					<img src={lSkills} alt="Logo" />
 				</Link>
-				<div className={styles.contBt}>
-					<div className={styles.bts}>
-						<button className={styles.btTri} onClick={Hub}>
-							<h1>Suas Trilhas</h1>
-						</button>
-						<button className={styles.btEx} onClick={Sair}>
-							<h1>Sair </h1>
-						</button>
+				<div className={styles.opsBody}>
+					<div className={styles.ops}>
+						{showAdm == true && (
+							<div>
+								<Link to="/skills/hubadmin" className={styles.link}><h1>Admin</h1></Link>
+							</div>
+						)}
+						<Link to="/skills/hubTrilhas" className={styles.link}><h1>Suas Trilhas</h1></Link>
+						<Link to="/skills/login" className={styles.link}><h1>Sair </h1></Link>
+						<div className={styles.elipse}>
+							<img src="" alt="" />
+						</div>
 					</div>
 				</div>
 			</div>

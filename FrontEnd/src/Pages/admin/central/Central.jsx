@@ -13,7 +13,6 @@ const Central = () => {
   const [centralTrail, setCentralTrail] = useState('')
   const [selectedTeams, setSetSelectedTeams] = useState([]);
   const [selectedTrail, setSetSelectedTrail] = useState([]);
-  const [color, setColor] = useState('#fff')
 
   const token = localStorage.getItem('token');
   const decodedToken = jwtDecode(token);
@@ -44,13 +43,14 @@ const Central = () => {
 
   const centralizer = async () => {
     try {
-      const create = await axios.post(`${api}/central/centralizedTeams/${centralTeam}/${centralTrail}`, {})
+      const create = await axios.post(`${api}/central/centralizedTeams/`,
+        {
+          trail_id: centralTrail,
+          team_id: centralTeam
+        })
     } catch {
     }
   }
-
-  console.log("Team: ", centralTeam)
-  console.log("Trail: ", centralTrail)
 
   useEffect(() => {
     team();
@@ -60,11 +60,9 @@ const Central = () => {
   const toggleTeamSelection = (userId) => {
     console.log("ID do usuário selecionado:", userId);
     if (selectedTeams.includes(userId)) {
-      console.log("Removendo usuário:", userId);
       setSetSelectedTeams([]);
       setCentralTeam('')
     } else {
-      console.log("Adicionando usuário:", userId);
       setSetSelectedTeams([userId]);
       setCentralTeam(userId)
     }
@@ -73,18 +71,13 @@ const Central = () => {
   const toggleTrailSelection = (userId) => {
     console.log("ID do usuário selecionado:", userId);
     if (selectedTrail.includes(userId)) {
-      console.log("Removendo usuário:", userId);
       setSetSelectedTrail([]);
       setCentralTrail('')
     } else {
-      console.log("Adicionando usuário:", userId);
       setSetSelectedTrail([userId]);
       setCentralTrail(userId)
     }
   };
-
-  console.log("Selected Teams: ", selectedTeams);
-  console.log("Selected Trails: ", selectedTrail);
 
   return (
     <div className={styles.container}>

@@ -25,6 +25,8 @@ const CadastroAdm = () => {
 	const [area, setArea] = useState("");
 	const [email, setEmail] = useState("");
 
+	const color = localStorage.getItem("color")
+
 	const cadastrationAdm = async (e) => {
 		e.preventDefault();
 
@@ -72,7 +74,7 @@ const CadastroAdm = () => {
 	};
 
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} style={{backgroundColor:color}}>
 			<Navbar />
 			<form onSubmit={cadastrationAdm} className={styles.contJust}>
 				<div className={styles.contLogin}>

@@ -14,20 +14,17 @@ import api from "../../../../api";
 
 const CadMassa = () => {
   const [file, setFile] = useState(null);
-  const [uploadStatus, setUploadStatus] = useState("");
   const [previewData, setPreviewData] = useState([]);
   const [show, setShow] = useState(false);
 
+  const color = localStorage.getItem("color")
+
   const showEnviar = () => {
-    setShow(true);
-  };
-
-  const setArquivo = (e) => {
-    setFile(e.target.files[0]);
-  };
-
-  const getArquivo = () => {
-    document.getElementById("fileInput").click();
+    if (file) {
+      setShow(true);
+    } else {
+      setShow(false)
+    }
   };
 
   const enviar = async () => {
@@ -40,25 +37,13 @@ const CadMassa = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      toast.success("Cadastro feito com sucesso", {
-        position: "top-right",
-        autoClose: 1500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-
-      setUploadStatus("Arquivo enviado com sucesso!");
+      toast.success("Cadastro feito com sucesso",);
     } catch (error) {
       console.error("Erro ao enviar o arquivo", error);
-      setUploadStatus("Erro ao enviar o arquivo. Tente novamente.");
     }
   };
 
-  const preview = async () => {
+  const preview = async (file) => {
     const formData = new FormData();
     formData.append("file", file);
 
@@ -74,107 +59,94 @@ const CadMassa = () => {
       );
 
       const fomatData = response.data.map((item) => ({
-        Nome: item.name || "N/A",
-        EDV: item.edv || "N/A",
-        Email: item.email_user || "N/A",
-        Area: item.user_area || "N/A",
-        Focal: item.focal_point || "N/A",
-        Admin: item.admin_email || "N/A",
+        Nome: item.nome || "N/A",
+        Edv: item.Edv || "N/A",
+        Area: item.area || "N/A",
+        Focal: item.Focal_Point || "N/A",
+        Gestor: item.email_gestor || "N/A",
       }));
 
       setPreviewData(fomatData);
-      showEnviar();
+      setShow(true)
     } catch (error) {
       console.error("Erro ao visualizar o arquivo", error);
     }
   };
 
+  const setArquivo = (e) => {
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+    preview(selectedFile);
+  };
+
+  const getArquivo = () => {
+    document.getElementById("fileInput").click();
+  };
+
   return (
     <div className={styles.container}>
       <Navbar />
-      <div className={styles.contJust}>
-        <div className={styles.contCad}>
-          <div className={styles.header}>
-            <div className={styles.bts}>
-              <input type="file" onChange={setArquivo} id="fileInput" />
-              <button onClick={getArquivo} className={styles.btFile}>
-                Enviar Arquivo
-              </button>
-            </div>
-            <div className={styles.title}>
-              <h1>Cadastro em massa</h1>
-            </div>
-            <div className={styles.bts}>
-              <div className={styles.contI}>
-                <div className={styles.i}>
-                  <div className={styles.descI}>
-                    <p>
-                      Arquivo de exemplo para seguir padrão de inserção de dados
-                      no sistema!
-                    </p>
-                  </div>
-                  <AiOutlineExclamationCircle size={25} />
-                </div>
-              </div>
-              <button className={styles.btBArquivo}>
-                <PiMicrosoftExcelLogoFill size={75} />
-                Baixar arquivo de exemplo
-              </button>
-            </div>
+      <h1>Cadastro em massa</h1>
+      <button className={styles.btBArquivo}>
+        <PiMicrosoftExcelLogoFill size={25} />
+        Baixar arquivo de exemplo
+      </button>
+      <div className={styles.tableBody}>
+        <h1> Dados do usuário</h1>
+        <div className={styles.table}>
+          <div className={styles.columns}>
+            <ul>
+              <h3>Nome</h3>
+              {previewData.map((item, index) => (
+                <p key={index}>{`${item.Nome}`}</p>
+              ))}
+            </ul>
           </div>
-          <div className={styles.contInfos}>
-            <div className={styles.infos}>
-              <ul className={styles.board}>
-                <h3>Nome</h3>
-                {previewData.map((item, index) => (
-                  <p key={index}>{`${item.Nome}`}</p>
-                ))}
-              </ul>
-
-              <ul className={styles.board}>
-                <h3>EDV</h3>
-                {previewData.map((item, index) => (
-                  <p key={index}>{`${item.EDV}`}</p>
-                ))}
-              </ul>
-              <ul className={styles.board}>
-                <h3>Email</h3>
-                {previewData.map((item, index) => (
-                  <p key={index}>{`${item.Email}`}</p>
-                ))}
-              </ul>
-              <ul className={styles.board}>
-                <h3>Area</h3>
-                {previewData.map((item, index) => (
-                  <p key={index}>{`${item.Area}`}</p>
-                ))}
-              </ul>
-
-              <ul className={styles.board}>
-                <h3>Focal Point</h3>
-                {previewData.map((item, index) => (
-                  <p key={index}>{`${item.Focal}`}</p>
-                ))}
-              </ul>
-
-              <ul className={styles.board}>
-                <h3>Email Gestor</h3>
-                {previewData.map((item, index) => (
-                  <p key={index}>{`${item.Email}`}</p>
-                ))}
-              </ul>
-            </div>
+          <div className={styles.columns}>
+            <ul>
+              <h3>EDV</h3>
+              {previewData.map((item, index) => (
+                <p key={index}>{`${item.Edv}`}</p>
+              ))}
+            </ul>
           </div>
-          <div className={styles.footer}>
-            <button onClick={enviar} className={styles.send}>
-              Cadastrar
-            </button>
-            <button onClick={preview} className={styles.send}>
-              Visualização
-            </button>
+          <div className={styles.columns}>
+            <ul>
+              <h3>Área</h3>
+              {previewData.map((item, index) => (
+                <p key={index}>{`${item.Area}`}</p>
+              ))}
+            </ul>
+          </div>
+          <div className={styles.columns}>
+            <ul>
+              <h3>Focal Point</h3>
+              {previewData.map((item, index) => (
+                <p key={index}>{`${item.Focal}`}</p>
+              ))}
+            </ul>
+          </div>
+          <div className={styles.columns}>
+            <ul>
+              <h3>Email Gestor</h3>
+              {previewData.map((item, index) => (
+                <p key={index}>{`${item.Gestor}`}</p>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
+      <div className={styles.bts}>
+        <button onClick={getArquivo} className={styles.btAdd} style={{ color: color }}>
+          Adicionar arquivo
+        </button>
+        {show == true && (
+          <button onClick={enviar} className={styles.btAdd} style={{ color: color }}>
+            Cadastrar
+          </button>
+        )}
+      </div>
+      <input type="file" onChange={setArquivo} id="fileInput" style={{ display: "none" }} />
     </div>
   );
 };
