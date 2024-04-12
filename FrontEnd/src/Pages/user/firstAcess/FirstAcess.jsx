@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Input from '../../../components/input/Input'
+import Input from '../../../components/inputs/inputText/Input';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';

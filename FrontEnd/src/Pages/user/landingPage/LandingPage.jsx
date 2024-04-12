@@ -16,20 +16,22 @@ const LandingPage = () => {
 
 	const navigate = useNavigate()
 
-	const token = localStorage.getItem('token');
-	const decodedToken = jwtDecode(token);
-	const isAdm = decodedToken.typeUser
 
 	const Logar = () => {
-		if (token) {
-			if (isAdm == "SAdmin" || isAdm == "Admin") {
-				navigate("/skills/hubadmin");
-			} else {
-				navigate("/skills/hubtrilhas");
-			}
-		} else {
-			navigate("/skills/login")
-		}
+		// if (!localStorage) {
+		// 	const token = localStorage.getItem('token');
+		// 	const decodedToken = jwtDecode(token);
+		// 	const isAdm = decodedToken.typeUser
+		// 	if (token) {
+		// 		if (isAdm == "SAdmin" || isAdm == "Admin") {
+		// 			navigate("/skills/hubadmin");
+		// 		} else {
+		// 			navigate("/skills/hubtrilhas");
+		// 		}
+		// 	}
+		// } else {
+		navigate("/skills/login")
+		// }
 	};
 
 	useEffect(() => {

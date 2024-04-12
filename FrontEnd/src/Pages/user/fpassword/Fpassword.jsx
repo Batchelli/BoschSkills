@@ -12,9 +12,7 @@ import { HiIdentification } from "react-icons/hi2";
 import { MdEmail } from "react-icons/md";
 import api from "../../../api";
 
-// COLOCAR UM AVISO QUANDO O EDV NÃO ESTÁ CADASTRADO NO BANCO
-
-export const Fpassword = () => {
+const Fpassword = () => {
 	const navigate = useNavigate();
 	const [edv, setEdv] = useState("");
 	const [emailUser, setEmail] = useState("");
@@ -122,7 +120,7 @@ export const Fpassword = () => {
 				<div className={styles.input}>
 					<MdEmail size={20} className={styles.icon} />
 					<div className={styles.line}></div>
-					<input type="text" class={styles.teste}/>
+					<input type="text" class={styles.teste} />
 				</div>
 				<br></br>
 				<button onClick={confirmeCode}> CONFIRMAR CÓDIGO</button>
@@ -141,5 +139,7 @@ export const Fpassword = () => {
 				theme="light"
 			/>
 		</div>
-	);
-};
+	); F
+}
+
+export default Fpassword

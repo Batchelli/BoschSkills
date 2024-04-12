@@ -1,6 +1,6 @@
 #Este arquivo é responsável por criar as tabelas no banco de dados
 import sys
-default_path = "C:\\Users\\ct67ca\\Desktop\\Skills\\git-skills\\back"
+default_path = "C:\\Users\\51954963823\\Desktop\\BoschSkills\\BackEnd"
 sys.path.append(default_path)
 
 

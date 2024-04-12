@@ -19,14 +19,6 @@ const CadMassa = () => {
 
   const color = localStorage.getItem("color")
 
-  const showEnviar = () => {
-    if (file) {
-      setShow(true);
-    } else {
-      setShow(false)
-    }
-  };
-
   const enviar = async () => {
     const formData = new FormData();
     formData.append("file", file);
@@ -87,13 +79,18 @@ const CadMassa = () => {
     <div className={styles.container}>
       <Navbar />
       <h1>Cadastro em massa</h1>
-      <button className={styles.btBArquivo}>
-        <PiMicrosoftExcelLogoFill size={25} />
-        Baixar arquivo de exemplo
-      </button>
       <div className={styles.tableBody}>
-        <h1> Dados do usuário</h1>
-        <div className={styles.table}>
+        <div className={styles.tableHeader} style={{ backgroundColor: color, border: `2px solid ${color}` }}>
+          <div className={styles.title}>
+            <h1> Dados do usuário</h1>
+          </div>
+          <div className={styles.btH}>
+            <button className={styles.btDown} style={{ color: color }}>
+              <PiMicrosoftExcelLogoFill size={25} />
+            </button>
+          </div>
+        </div>
+        <div className={styles.table} style={{ border: `2px solid ${color}` }}>
           <div className={styles.columns}>
             <ul>
               <h3>Nome</h3>
