@@ -2,11 +2,11 @@ import React from "react";
 import styles from "./CardTeam.module.css";
 import { Link } from "react-router-dom";
 
-const CardTeam = ({ url, nome, lider }) => {
+const CardTeam = ({ url, nome, lider, img}) => {
 	return (
 		<Link to={url} className={styles.contTri}>
 			<div className={styles.imgMask}>
-				<img src="src\components\assets\figma.jpg" />
+				<img src={img}/>
 			</div>
 			<div className={styles.details}>
 				<div className={styles.front}>
