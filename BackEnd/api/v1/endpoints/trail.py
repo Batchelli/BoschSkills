@@ -30,7 +30,8 @@ async def post_trail(trail: TrailSchema, db: AsyncSession = Depends(get_session)
                         criador_trilha = trail.criador_trilha,
                         carga_horaria = trail.carga_horaria,
                         conteudo = trail.conteudo,
-                        image_trail= trail.image_trail
+                        image_trail= trail.image_trail,
+                        id_prova= trail.id_prova
     )
     db.add(new_trail)
     await db.commit()
@@ -76,20 +77,7 @@ async def update_trail_photo(Trail_id: int, updated_info: TrailSchema, db: Async
         else:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="trail not found")
         
-# @router.put('/updateTrailPhoto/{Trail_n}', response_model=TrailSchema, status_code=status.HTTP_202_ACCEPTED)
-# async def update_trail_photo(Trail_n: str, updated_info: TrailSchema, db: AsyncSession = Depends(get_session)):
-#     """Update user information (name and email) based on user_edv."""
-#     async with db as session:
-#         query = select(Trail).filter(Trail.nome == Trail_n)
-#         result = await session.execute(query)
-#         user_to_update = result.scalar_one_or_none()
-        
-#         if user_to_update:
-#             user_to_update.image_trail = updated_info.image_trail
-#             await session.commit()
-#             return user_to_update
-#         else:
-#             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="trail not found")
+
         
 
 #Retorna a trilha que contém o ID que foi declarado como parâmetro
@@ -106,7 +94,7 @@ async def get_idTrails(id: int, db: AsyncSession = Depends(get_session)):
             raise(HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Trail not found"))
         
 #Retorna todas trilhas que tem o EDV do criador pesquisado pelo parâmetro
-@router.get('/trailsByCreator/{creator}')
+@router.get('/trails_creator/{creator}')
 async def get_creatorTrails(creator: int, db: AsyncSession = Depends(get_session)):
     """This router get the edv's user"""
     async with db as session:

@@ -11,35 +11,42 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 import api from "../../../../api";
+import LoadinPage from "../../../../components/loadingPage/LoadingPage";
 
 const CadMassa = () => {
   const [file, setFile] = useState(null);
   const [previewData, setPreviewData] = useState([]);
   const [show, setShow] = useState(false);
+  const [loading, setLoadgin] = useState(false)
+
 
   const color = localStorage.getItem("color")
 
   const enviar = async () => {
+    setLoadgin(true)
     const formData = new FormData();
     formData.append("file", file);
 
     try {
-      await axios.post(`${api}/admin/cadXml/uploadfile/`, formData, {
+      await axios.post(`${api}/admin/uploadfile/`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
       toast.success("Cadastro feito com sucesso",);
+      setLoadgin(false)
     } catch (error) {
+      toast.error("Erro ao enviar o arquivo",);
       console.error("Erro ao enviar o arquivo", error);
+      setLoadgin(false)
     }
   };
 
   const preview = async (file) => {
     const formData = new FormData();
     formData.append("file", file);
-
     try {
+
       const response = await axios.post(
         `${api}/admin/cadXml/previewfile/`,
         formData,
@@ -49,7 +56,6 @@ const CadMassa = () => {
           },
         }
       );
-
       const fomatData = response.data.map((item) => ({
         Nome: item.nome || "N/A",
         Edv: item.Edv || "N/A",
@@ -84,6 +90,7 @@ const CadMassa = () => {
           <div className={styles.title}>
             <h1> Dados do usuário</h1>
           </div>
+          <div className={styles.contXml}></div>
           <div className={styles.btH}>
             <button className={styles.btDown} style={{ color: color }}>
               <PiMicrosoftExcelLogoFill size={25} />
@@ -144,6 +151,21 @@ const CadMassa = () => {
         )}
       </div>
       <input type="file" onChange={setArquivo} id="fileInput" style={{ display: "none" }} />
+      {loading == true && (
+        <LoadinPage />
+      )}
+      <ToastContainer
+        position="top-right"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable={false}
+        pauseOnHover={false}
+        theme="light"
+      />
     </div>
   );
 };

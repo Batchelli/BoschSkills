@@ -165,6 +165,7 @@ const CriarTri = () => {
 					carga_horaria: cargaHora,
 					conteudo: JSON.stringify(conteudoTrilha),
 					image_trail: url,
+					id_prova: 1,
 				}
 			);
 			toast.success("Trilha criada com sucesso.", { position: "top-right" });

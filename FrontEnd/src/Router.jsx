@@ -64,15 +64,13 @@ const Router = () => {
 					<Route element={<FirstAcessUser />} path="/skills/first"/>
 					<Route element={<MakeTest />} path="/skills/maketest"/>
 					<Route element={<Prova />} path="/skills/prova"/>
-					<Route element={<UserPerfil />} path="/skills/userprofile"/>
 
 					<Route path="/skills/hubTrilhas" element={<ProtectedRoute element={<Hub />} allowedUserTypes={['SAdmin', 'Admin', 'User']} />} />
 					<Route path="/skills/trilha" element={<ProtectedRoute element={<Trilha />} allowedUserTypes={['SAdmin', 'Admin', 'User']} />} />
-
+					<Route path="/skills/userprofile" element={<ProtectedRoute element={<UserPerfil />} allowedUserTypes={['SAdmin', 'Admin', 'User']} />} />
 					<Route path="/skills/singleregister" element={<ProtectedRoute element={<Cadastro />} allowedUserTypes={['SAdmin', 'Admin']} />} />
 					<Route path="/skills/multiregister" element={<ProtectedRoute element={<CadMassa />} allowedUserTypes={['SAdmin', 'Admin']} />} />
 					<Route path="/skills/adminregister" element={<ProtectedRoute element={<CadastroAdm />} allowedUserTypes={['SAdmin']} />} />
-
 					<Route path="/skills/hubadmin" element={<ProtectedRoute element={<HubADM />} allowedUserTypes={['SAdmin', 'Admin']} />} />
 					<Route path="/skills/hubcadastros" element={<ProtectedRoute element={<HubCad />} allowedUserTypes={['SAdmin', 'Admin']} />} />
 					<Route path="/skills/hubtrilhasadm" element={<ProtectedRoute element={<HubTri />} allowedUserTypes={['SAdmin', 'Admin']} />} />
@@ -81,7 +79,6 @@ const Router = () => {
 					<Route path="/skills/hubteam" element={<ProtectedRoute element={<HubTeam />} allowedUserTypes={['SAdmin', 'Admin']} />} />
 					<Route path="/skills/teams" element={<ProtectedRoute element={<HubTeams />} allowedUserTypes={['SAdmin', 'Admin']} />} />
 					<Route path="/skills/adicionar" element={<ProtectedRoute element={<HubAdd />} allowedUserTypes={['SAdmin', 'Admin']} />} />
-
 					<Route path="/skills/criartime" element={<ProtectedRoute element={<TurmaCri />} allowedUserTypes={['SAdmin', 'Admin']} />} />
 					<Route path="/skills/criartrilha" element={<ProtectedRoute element={<MakeTri />} allowedUserTypes={['SAdmin', 'Admin']} />} />
 				</Routes>
