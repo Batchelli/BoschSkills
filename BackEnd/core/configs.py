@@ -13,7 +13,7 @@ class Settings(BaseSettings):
 		"""
 		API_V1_STR: str = '/api/v1' #não precisar inserir via hard coding
 		#coloca-se o banco que vai usar e o localhost, etscursos é o banco de dados
-		DB_URL: str = 'mysql+aiomysql://root@127.0.0.1:3306/BoschSkills' #ideal serial user:password
+		DB_URL: str = 'mysql+aiomysql://root@127.0.0.1:3306/Skills' #ideal serial user:password
 		DBBaseModel = declarative_base() #serve para que os models herdem todos os recursos do sqlalchemy!
 		class Config:
 				case_sensitive = True #tudo maiúsculo manté tudo maiúsculo e vice-versa
