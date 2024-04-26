@@ -60,11 +60,11 @@ const Router = () => {
 					<Route element={<LandingPage />} path="/" exact />
 					<Route element={<Login />} path="/skills/login"/>
 					<Route element={<Central />} path="/skills/adicionarTime"/>
-					<Route element={<Fpassword />} path="/skills/fpass"/>
-					<Route element={<FirstAcessUser />} path="/skills/first"/>
+					<Route element={<Fpassword />} path="/skills/fpass"/> {/* Página já estilizada precisa de testes */}
+					<Route element={<FirstAcessUser />} path="/skills/first"/>{/* Página já estilizada precisa da lógica */}
 					<Route element={<MakeTest />} path="/skills/maketest"/>
 					<Route element={<Prova />} path="/skills/prova"/>
-					<Route element={<UserPerfil />} path="/skills/userprofile"/>
+					<Route element={<UserPerfil />} path="/skills/userprofile"/>{/* Página já estilizada precisa da integração para ver as provas*/}
 
 					<Route path="/skills/hubTrilhas" element={<ProtectedRoute element={<Hub />} allowedUserTypes={['SAdmin', 'Admin', 'User']} />} />
 					<Route path="/skills/trilha" element={<ProtectedRoute element={<Trilha />} allowedUserTypes={['SAdmin', 'Admin', 'User']} />} />

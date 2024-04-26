@@ -11,12 +11,14 @@ import { FaGear } from "react-icons/fa6";
 import { HiIdentification } from "react-icons/hi2";
 import { MdEmail } from "react-icons/md";
 import api from "../../../api";
+import lSkills from "../../../components/assets/logoSkill-B.svg"
 
 const Fpassword = () => {
 	const navigate = useNavigate();
 	const [edv, setEdv] = useState("");
 	const [emailUser, setEmail] = useState("");
 	const [confirm, setConfirm] = useState("");
+	const color = localStorage.getItem("color")
 
 	const email = async (e) => {
 		e.preventDefault();
@@ -30,28 +32,10 @@ const Fpassword = () => {
 					edv: edv,
 				}
 			);
-			toast.success("Usuário cadastrado com sucesso", {
-				position: "top-right",
-				autoClose: 1500,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-				theme: "light",
-			});
+			toast.success("Usuário cadastrado com sucesso");
 		} catch (error) {
 			console.error("Erro na requisição:", error);
-			toast.error("Usuário não cadastrado", {
-				position: "top-right",
-				autoClose: 1500,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-				theme: "light",
-			});
+			toast.error("Usuário não cadastrado");
 		}
 	};
 
@@ -75,10 +59,10 @@ const Fpassword = () => {
 	};
 
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} style={{ backgroundColor: color }}>
 			<div className={styles.contLogin}>
 				<div className={styles.logo}>
-					<img src="src\components\assets\logoSkill-B.svg" alt="logo" />
+					<img src={lSkills} alt="logo" />
 				</div>
 				<div className={styles.inputs}>
 					<div className={styles.dadosUser}>
@@ -114,16 +98,26 @@ const Fpassword = () => {
 
 				<div className={styles.bts}>
 					<button className={styles.bt} onClick={email}>
-						<h1>MANDAR EMAIL</h1>
+						<h3>Enviar e-mail</h3>
 					</button>
 				</div>
 				<div className={styles.input}>
 					<MdEmail size={20} className={styles.icon} />
 					<div className={styles.line}></div>
-					<input type="text" class={styles.teste} />
+					<Input
+						label="Digite o código"
+						type="text"
+						id="codigo"
+						placeholder=""
+						value={confirm}
+						onChange={(e) => setConfirm(e.target.value)}
+					/>
 				</div>
-				<br></br>
-				<button onClick={confirmeCode}> CONFIRMAR CÓDIGO</button>
+				<div className={styles.bts} >
+					<button onClick={confirmeCode} className={styles.bt}>
+						<h3>Verificar código</h3>
+					</button>
+				</div>
 			</div>
 
 			<ToastContainer
