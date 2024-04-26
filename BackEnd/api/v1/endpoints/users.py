@@ -20,6 +20,7 @@ from fastapi.security import OAuth2PasswordBearer
 from passlib.hash import pbkdf2_sha256
 from jose import JWTError, jwt
 from datetime import datetime, timedelta
+from sqlalchemy import or_, and_, func
 
 from sqlalchemy.orm import sessionmaker, Session as BaseSession
 from sqlalchemy import delete
@@ -204,6 +205,26 @@ async def get_users_by_area(area: str, db: AsyncSession = Depends(get_session)):
             return users
         else:
             raise(HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Area not found"))
+        
+@router.get('/search/')
+async def get_search(name_sequence: str, db: AsyncSession = Depends(get_session)):
+    if not name_sequence:
+        raise HTTPException(status_code=400, detail="Please provide a name sequence.")
+ 
+    async with db as session:
+        # Construir a lista de condições OR para verificar cada letra na sequência do nome
+        conditions = [func.substr(UserModel.name, i+1, 1) == name_sequence[i] for i in range(len(name_sequence))]
+ 
+        # Consulta SQL para buscar os registros que contêm todas as letras na sequência especificada
+        query = select(UserModel).filter(and_(*conditions))
+ 
+        result = await session.execute(query)
+        users = result.scalars().all()
+ 
+        if users:
+            return users
+        else:
+            raise HTTPException(status_code=404, detail="No matching records found.")
 #Fim das rotas GET        
 
 #Inicio das rotas DELETE

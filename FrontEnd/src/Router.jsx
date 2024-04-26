@@ -27,7 +27,12 @@ import HubTris from "./Pages/admin/hubs/hub-TRIS/HubTris.jsx";
 import HubAdd from "./Pages/admin/hubs/hub-ADD/HubAdd.jsx";
 
 import Fpassword from "./Pages/user/fpassword/Fpassword.jsx";
-import FirstAcess from "./Pages/user/firstAcess/FirstAcess.jsx";
+import FirstAcessUser from "./Pages/user/FirstAcessUser/FirstAcessUser.jsx";
+import UserPerfil from "./Pages/user/userPerfil/UserPerfil.jsx";
+
+import Prova from "./Pages/user/prova/Prova.jsx";
+import MakeTest from "./Pages/admin/makeTest/MakeTest.jsx";
+
 
 const ProtectedRoute = ({ element, allowedUserTypes }) => {
 	const token = localStorage.getItem('token');
@@ -56,7 +61,10 @@ const Router = () => {
 					<Route element={<Login />} path="/skills/login"/>
 					<Route element={<Central />} path="/skills/adicionarTime"/>
 					<Route element={<Fpassword />} path="/skills/fpass"/>
-					<Route element={<FirstAcess />} path="/skills/first"/>
+					<Route element={<FirstAcessUser />} path="/skills/first"/>
+					<Route element={<MakeTest />} path="/skills/maketest"/>
+					<Route element={<Prova />} path="/skills/prova"/>
+					<Route element={<UserPerfil />} path="/skills/userprofile"/>
 
 					<Route path="/skills/hubTrilhas" element={<ProtectedRoute element={<Hub />} allowedUserTypes={['SAdmin', 'Admin', 'User']} />} />
 					<Route path="/skills/trilha" element={<ProtectedRoute element={<Trilha />} allowedUserTypes={['SAdmin', 'Admin', 'User']} />} />

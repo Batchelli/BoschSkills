@@ -3,8 +3,6 @@ from typing import Optional, List
 from pydantic import BaseModel as SchemaBaseModel
 from sqlalchemy import LargeBinary
 
-
-
 class TrailSchema(SchemaBaseModel):
     id: Optional[int] = None
     nome: str
@@ -14,4 +12,5 @@ class TrailSchema(SchemaBaseModel):
     carga_horaria: int
     conteudo: str
     image_trail: Optional [str]
+    id_prova: Optional[int]
 

@@ -1,0 +1,100 @@
+.container{
+    background-color: #9E2896;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.divs{
+    display: flex;
+    justify-content: space-around;
+    background-color: rgb(255, 255, 255);
+    width: 800px;
+    height: 600px;
+    
+  
+}
+
+.backImg{
+    background-image: url("../../../components/assets/backFirst.svg") ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 40%;
+
+    display: flex;
+    flex-direction: column;
+    padding: 10%;
+    width: 50%;
+
+}
+.label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 2%;
+    color: white;
+}
+
+.inputs{
+    padding: 2%;
+    margin-bottom: 5%;
+    
+    height: 12%;
+
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-color: white;
+}
+.btns{
+    width: 40%;
+}
+
+.contInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2%;
+}
+
+.p{
+    color: rgb(0, 0, 0)
+}
+.token{
+    width: 60%;
+    padding: 10%;
+}
+.text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 3%;
+    text-align: center;
+
+}
+
+.inputG{
+    width: 50%;
+    padding: 10%
+}
+.cadeado{
+    width: 35%;
+}
+.rightCenter{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.pBranco{
+    color: white;
+    text-align: center;
+    padding: 1%;
+    margin-bottom: 5%;
+}

@@ -11,6 +11,8 @@ from models.create_team_model import CreateTeam
 from models.users_team_model import Team
 from models.users_model import User
 from models.central_model import Central
+from models.prova_model import Provas
+from models.medalha_model import Medalhas
 
 
 async def create_tables() -> None:
