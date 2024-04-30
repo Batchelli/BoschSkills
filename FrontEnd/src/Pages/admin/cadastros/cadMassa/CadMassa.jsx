@@ -11,17 +11,27 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 import api from "../../../../api";
+<<<<<<< HEAD
 import LoadinPage from '../../../../components/loadingPage/LoadingPage'
+=======
+import LoadinPage from "../../../../components/loadingPage/LoadingPage";
+>>>>>>> 5cd031830c9a7c0ede23d570d19d68da66526286
 
 const CadMassa = () => {
   const [file, setFile] = useState(null);
   const [previewData, setPreviewData] = useState([]);
   const [show, setShow] = useState(false);
+<<<<<<< HEAD
   const [load, setLoad] = useState(false)
+=======
+  const [loading, setLoadgin] = useState(false)
+
+>>>>>>> 5cd031830c9a7c0ede23d570d19d68da66526286
 
   const color = localStorage.getItem("color")
 
   const enviar = async () => {
+    setLoadgin(true)
     const formData = new FormData();
     formData.append("file", file);
     setLoad(true)
@@ -32,20 +42,29 @@ const CadMassa = () => {
         },
       });
       toast.success("Cadastro feito com sucesso",);
+<<<<<<< HEAD
       setLoad(false)
       setShow(false)
       setPreviewData([])
+=======
+      setLoadgin(false)
+>>>>>>> 5cd031830c9a7c0ede23d570d19d68da66526286
     } catch (error) {
+      toast.error("Erro ao enviar o arquivo",);
       console.error("Erro ao enviar o arquivo", error);
+<<<<<<< HEAD
       setLoad(false)
+=======
+      setLoadgin(false)
+>>>>>>> 5cd031830c9a7c0ede23d570d19d68da66526286
     }
   };
 
   const preview = async (file) => {
     const formData = new FormData();
     formData.append("file", file);
-
     try {
+
       const response = await axios.post(
         `${api}/admin/cadXml/previewfile/`,
         formData,
@@ -55,7 +74,6 @@ const CadMassa = () => {
           },
         }
       );
-
       const fomatData = response.data.map((item) => ({
         Nome: item.nome || "N/A",
         Edv: item.Edv || "N/A",
@@ -90,6 +108,7 @@ const CadMassa = () => {
           <div className={styles.title}>
             <h1> Dados do usuário</h1>
           </div>
+          <div className={styles.contXml}></div>
           <div className={styles.btH}>
             <button className={styles.btDown} style={{ color: color }}>
               <PiMicrosoftExcelLogoFill size={25} />
@@ -150,12 +169,20 @@ const CadMassa = () => {
         )}
       </div>
       <input type="file" onChange={setArquivo} id="fileInput" style={{ display: "none" }} />
+<<<<<<< HEAD
       {load == true && (
+=======
+      {loading == true && (
+>>>>>>> 5cd031830c9a7c0ede23d570d19d68da66526286
         <LoadinPage />
       )}
       <ToastContainer
         position="top-right"
+<<<<<<< HEAD
         autoClose={2500}
+=======
+        autoClose={1500}
+>>>>>>> 5cd031830c9a7c0ede23d570d19d68da66526286
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

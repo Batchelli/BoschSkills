@@ -183,7 +183,11 @@ const CriarTri = () => {
 					carga_horaria: cargaHora,
 					conteudo: JSON.stringify(conteudoTrilha),
 					image_trail: url,
+<<<<<<< HEAD
 					id_prova: 1
+=======
+					id_prova: 1,
+>>>>>>> 5cd031830c9a7c0ede23d570d19d68da66526286
 				}
 			);
 			toast.success("Trilha criada com sucesso.", { position: "top-right" });
