@@ -63,6 +63,34 @@ def lerXml(df):
     print(df)
     return df
 
+#Faz o registro de apenas um usuário por vez na plataforma
+@router.post ('/singleRegister', status_code = status.HTTP_201_CREATED, response_model= UserSchema)
+async def post_user(user: UserSchema, db: AsyncSession = Depends(get_session)):
+    """This route is to create a new user"""
+    #Criptografa a senha do usuário, que no primeiro acesso é o edv
+    criptografia = password_encrypt(user.edv)
+    #Verifica se o EDV de usuário já existe
+    existing_user = await db.execute(select(UserModel).filter(UserModel.edv == user.edv))
+    if existing_user.scalar():
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="O EDV já esta em uso")
+
+    new_user = UserModel ( id = 0,
+                         name = user.name,
+                         edv = user.edv,
+                         email_user = user.email_user,
+                         user_area = user.user_area,
+                         focal_point= user.focal_point,
+                         admin_email = user.admin_email,
+                         percentage = user.percentage,
+                         typeUser = user.typeUser,
+                         is_activate = False,
+                         hashed_password = criptografia,
+    )
+    #Faz a inserção do usuário no banco
+    db.add(new_user)
+    await db.commit()
+    return new_user
+
 #Essa função faz a leitura do arquivo excel e insere no banco os novos usuários que existem nele
 @router.post("/uploadfile/")
 async def create_upload_file(file: UploadFile = File(...)):
@@ -128,33 +156,3 @@ async def redArchive(file: UploadFile = File(...)):
     except Exception as e:
         raise HTTPException(detail=str(e), status_code=500)
     
-#Faz o registro de apenas um usuário por vez na plataforma
-@router.post ('/singleRegister', status_code = status.HTTP_201_CREATED, response_model= UserSchema)
-async def post_user(user: UserSchema, db: AsyncSession = Depends(get_session)):
-    """This route is to create a new user"""
-    #Criptografa a senha do usuário, que no primeiro acesso é o edv
-    criptografia = password_encrypt(user.edv)
-    #Verifica se o EDV de usuário já existe
-    existing_user = await db.execute(select(UserModel).filter(UserModel.edv == user.edv))
-    if existing_user.scalar():
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="O EDV já esta em uso")
-
-    new_user = UserModel ( id = 0,
-                         name = user.name,
-                         edv = user.edv,
-                         email_user = user.email_user,
-                         user_area = user.user_area,
-                         focal_point= user.focal_point,
-                         admin_email = user.admin_email,
-                         percentage = user.percentage,
-                         typeUser = user.typeUser,
-                         is_activate = False,
-                         hashed_password = criptografia,
-    )
-    #Faz a inserção do usuário no banco
-    db.add(new_user)
-    await db.commit()
-    return new_user
-
-
-

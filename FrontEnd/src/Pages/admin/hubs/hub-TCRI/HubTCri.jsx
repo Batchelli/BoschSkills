@@ -46,6 +46,7 @@ const HubTCri = () => {
                         nome={trilha.nome}
                         lider={lider}
                         img={trilha.image_trail}
+                        url={`/skills/trilha/${trilha.id}`}
                     />
                 ))}
             </section>

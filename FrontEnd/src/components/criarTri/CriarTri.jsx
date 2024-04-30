@@ -22,6 +22,7 @@ import Input from "../inputs/inputText/Input";
 import ShowTri from "../showTri/ShowTri";
 
 import { jwtDecode } from "jwt-decode";
+import LoadinPage from "../loadingPage/LoadingPage";
 
 const CriarTri = () => {
 	const [elements, setElements] = useState([]);
@@ -36,9 +37,25 @@ const CriarTri = () => {
 	const [image, setImage] = useState(null);
 	const [imageUrl, setImageUrl] = useState(null);
 	const [showTri, setShowTri] = useState(false)
+	const [load, setLoad] = useState(false)
 
 	const token = localStorage.getItem('token');
 	const decodedToken = jwtDecode(token);
+
+	const color = localStorage.getItem('color')
+
+	const pos = () => {
+		setElements([])
+		setNovoTitulo([])
+		setCurrentElementIndex(null)
+		setCurrenttopicoIndex(null)
+		setNome('')
+		setDesc('')
+		setFocal('')
+		setCargaHora('')
+		setImage(null)
+		setImageUrl(null)
+	}
 
 	const showAsTri = () => {
 		setShowTri(true)
@@ -113,6 +130,7 @@ const CriarTri = () => {
 	};
 
 	const enviarDados = async () => {
+		setLoad(true)
 		try {
 			if (!image) {
 				toast.error("Nenhuma imagem selecionada para enviar.", { position: "top-right" });
@@ -165,13 +183,16 @@ const CriarTri = () => {
 					carga_horaria: cargaHora,
 					conteudo: JSON.stringify(conteudoTrilha),
 					image_trail: url,
+					id_prova: 1
 				}
 			);
 			toast.success("Trilha criada com sucesso.", { position: "top-right" });
-
+			setLoad(false)
 			setShowTri(false)
+			pos()
 		} catch (error) {
 			console.error("Erro ao enviar dados:", error);
+			setLoad(false)
 			toast.error("Erro ao criar a trilha. Tente novamente mais tarde.", { position: "top-right" });
 		}
 	};
@@ -212,11 +233,31 @@ const CriarTri = () => {
 		return tituloPadronizado;
 	};
 
+	const excluirElemento = (index) => {
+		const novosElementos = [...elements];
+		novosElementos.splice(index, 1); // Remove o elemento na posição 'index'
+		setElements(novosElementos);
+	};
+
+	const excluirParagrafo = (elementIndex, paragrafoIndex) => {
+		const novosElementos = [...elements];
+		novosElementos[elementIndex].topicos.splice(paragrafoIndex, 1); // Remove o parágrafo na posição 'paragrafoIndex' do elemento na posição 'elementIndex'
+		setElements(novosElementos);
+	};
+
 	return (
 		<div className={styles.container}>
 			{showLinkModal && (
 				<LinkModal onClose={closeLinkModal} onSave={saveLink} />
 			)}
+			<div className={styles.contbtshow}>
+				{showTri == true && (
+					<button className={styles.btshow} onClick={showAsNormal} style={{ border: `1px solid ${color}` }}>Voltar a edição</button>
+				)}
+				{showTri == false && (
+					<button className={styles.btshow} onClick={showAsTri} style={{ border: `1px solid ${color}` }}>Visualizar como trilha</button>
+				)}
+			</div>
 			{showTri == false && (
 				<div className={styles.contHeader}>
 					<div className={styles.contImg}>
@@ -283,7 +324,12 @@ const CriarTri = () => {
 								boxShadow: "0px 0px 0px 0px",
 							}}
 							contentArrowStyle={{ borderRight: "7px solid #007BC0" }}
-							iconStyle={{ background: "#007BC0", color: "#fff" }}
+							iconStyle={{ background: "#007BC0", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center" }}
+							icon={
+								<button className={styles.btExcluir} onClick={() => excluirElemento(index)}>
+									-
+								</button>
+							}
 						>
 							<div className={styles.contTitulos}>
 								<div className={styles.inpsTri}>
@@ -323,6 +369,9 @@ const CriarTri = () => {
 													</button>
 												</div>
 											)}
+											<button className={styles.btExP} onClick={() => excluirParagrafo(index, topicoIndex)}>
+												🗑
+											</button>
 										</div>
 										<div className={styles.check}>
 											<div className={styles.cLink}>
@@ -335,16 +384,6 @@ const CriarTri = () => {
 													}
 												/>
 												<p>Link</p>
-												<div className={styles.cLink}>
-													<input
-														type="checkbox"
-														checked={paragrafo.link || false}
-														onChange={(e) =>
-															setLink(index, topicoIndex, e.target.checked)
-														}
-													/>
-													<p>Modal</p>
-												</div>
 											</div>
 										</div>
 									</div>
@@ -387,17 +426,13 @@ const CriarTri = () => {
 				</div>
 			)}
 			<div className={styles.saveTri}>
-				{showTri == true && (
-					<button className={styles.btSave} onClick={showAsNormal} id={styles.asTri}>Voltar a edição</button>
-				)}
-				{showTri == false && (
-					<button className={styles.btSave} onClick={showAsTri} id={styles.asTri}>Visualizar como trilha</button>
-				)}
 				<button className={styles.btSave} onClick={enviarDados}>
 					Salvar Trilha
 				</button>
 			</div>
-
+			{load == true && (
+				<LoadinPage />
+			)}
 			<ToastContainer
 				position="top-right"
 				autoClose={4000}

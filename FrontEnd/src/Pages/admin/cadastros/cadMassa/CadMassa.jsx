@@ -11,27 +11,33 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 import api from "../../../../api";
+import LoadinPage from '../../../../components/loadingPage/LoadingPage'
 
 const CadMassa = () => {
   const [file, setFile] = useState(null);
   const [previewData, setPreviewData] = useState([]);
   const [show, setShow] = useState(false);
+  const [load, setLoad] = useState(false)
 
   const color = localStorage.getItem("color")
 
   const enviar = async () => {
     const formData = new FormData();
     formData.append("file", file);
-
+    setLoad(true)
     try {
-      await axios.post(`${api}/admin/cadXml/uploadfile/`, formData, {
+      await axios.post(`${api}/admin/uploadfile/`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
       toast.success("Cadastro feito com sucesso",);
+      setLoad(false)
+      setShow(false)
+      setPreviewData([])
     } catch (error) {
       console.error("Erro ao enviar o arquivo", error);
+      setLoad(false)
     }
   };
 
@@ -144,6 +150,21 @@ const CadMassa = () => {
         )}
       </div>
       <input type="file" onChange={setArquivo} id="fileInput" style={{ display: "none" }} />
+      {load == true && (
+        <LoadinPage />
+      )}
+      <ToastContainer
+        position="top-right"
+        autoClose={2500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable={false}
+        pauseOnHover={false}
+        theme="light"
+      />
     </div>
   );
 };

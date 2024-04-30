@@ -134,8 +134,9 @@
 	color: #fff;
 	font-size: 18px;
 	font-weight: bold;
-	background-image: linear-gradient(to right, #003253, #791d73);
 	border: 0;
+	color: black;
+	background-color: transparent;
 	border-radius: 8px;
 	cursor: pointer;
 	transition: all 0.2s ease-out;

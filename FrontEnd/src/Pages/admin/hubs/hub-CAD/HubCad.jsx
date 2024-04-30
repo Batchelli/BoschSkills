@@ -12,26 +12,26 @@ const HubCad = () => {
 			<NavBar />
 			<section className={styles.cards}>
 				<CardsCad
-					title="Cadastro Admin"
-					desc="Area destinada a cadastro de novos admins."
-					descI=" APENAS SUPER ADMIN TEM PERMIÇÃO PARA CADASTRAR NOVOS ADMINS!"
-					icon={CadImg}
-					color="blue"
-					path="skills/adminregister"
-				/>
-				<CardsCad
 					title="Cadastro Usuário"
 					desc="Area destinada a cadastro unico de novos usuários."
 					icon={CadImg}
-					color="green"
+					color="blue"
 					path="skills/singleregister"
 				/>
 				<CardsCad
 					title="Cadastro em massa"
 					desc="Area destinada a cadastro em massa de novos usuários."
 					icon={CadImg}
-					color="pink"
+					color="green"
 					path="skills/multiregister"
+				/>
+				<CardsCad
+					title="Cadastro Admin"
+					desc="Area destinada a cadastro de novos admins."
+					descI=" APENAS SUPER ADMIN TEM PERMIÇÃO PARA CADASTRAR NOVOS ADMINS!"
+					icon={CadImg}
+					color="pink"
+					path="skills/adminregister"
 				/>
 			</section>
 		</div>

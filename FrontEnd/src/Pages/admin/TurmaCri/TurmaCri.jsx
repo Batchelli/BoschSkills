@@ -25,6 +25,15 @@ const TurmaCri = () => {
 	const decodedToken = jwtDecode(token);
 	const lider = JSON.stringify(decodedToken.edv)
 
+	const color = localStorage.getItem('color')
+
+	const pos = () => {
+		setImage(null)
+		setSelectedUsers([])
+		setTeamName(null)
+		setImageUrl(null)
+	}
+
 	const getUsers = async () => {
 		try {
 			const response = await axios.get(`${api}/users/allUsers`)
@@ -190,7 +199,7 @@ const TurmaCri = () => {
 
 				</div>
 				<div className={styles.bt}>
-					<button onClick={enviarDados}>Criar time</button>
+					<button style={{ border: `1px solid${color}`}} onClick={enviarDados}>Criar time</button>
 				</div>
 			</div>
 			<ToastContainer

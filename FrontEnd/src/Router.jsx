@@ -23,8 +23,6 @@ import TurmaCri from "./Pages/admin/TurmaCri/TurmaCri.jsx";
 
 import { TypeProvider } from "./Auth.jsx"
 import Central from "./Pages/admin/central/Central.jsx";
-import HubTris from "./Pages/admin/hubs/hub-TRIS/HubTris.jsx";
-import HubAdd from "./Pages/admin/hubs/hub-ADD/HubAdd.jsx";
 
 import Fpassword from "./Pages/user/fpassword/Fpassword.jsx";
 import FirstAcessUser from "./Pages/user/FirstAcessUser/FirstAcessUser.jsx";
@@ -40,7 +38,7 @@ const ProtectedRoute = ({ element, allowedUserTypes }) => {
 		return <Navigate to="/skills/login" />;
 	} else {
 		const decodedToken = jwtDecode(token);
-		
+
 		if (allowedUserTypes.includes(decodedToken.typeUser)) {
 			return element;
 		} else {
@@ -58,16 +56,16 @@ const Router = () => {
 			<TypeProvider>
 				<Routes>
 					<Route element={<LandingPage />} path="/" exact />
-					<Route element={<Login />} path="/skills/login"/>
-					<Route element={<Central />} path="/skills/adicionarTime"/>
-					<Route element={<Fpassword />} path="/skills/fpass"/>
-					<Route element={<FirstAcessUser />} path="/skills/first"/>
-					<Route element={<MakeTest />} path="/skills/maketest"/>
-					<Route element={<Prova />} path="/skills/prova"/>
-					<Route element={<UserPerfil />} path="/skills/userprofile"/>
+					<Route element={<Login />} path="/skills/login" />
+					<Route element={<Central />} path="/skills/adicionarTime" />
+					<Route element={<Fpassword />} path="/skills/fpass" />
+					<Route element={<FirstAcessUser />} path="/skills/first" />
+					<Route element={<MakeTest />} path="/skills/maketest" />
+					<Route element={<Prova />} path="/skills/prova" />
+					<Route element={<UserPerfil />} path="/skills/userprofile" />
 
 					<Route path="/skills/hubTrilhas" element={<ProtectedRoute element={<Hub />} allowedUserTypes={['SAdmin', 'Admin', 'User']} />} />
-					<Route path="/skills/trilha" element={<ProtectedRoute element={<Trilha />} allowedUserTypes={['SAdmin', 'Admin', 'User']} />} />
+					<Route path="/skills/trilha/:id" element={<ProtectedRoute element={<Trilha />} allowedUserTypes={['SAdmin', 'Admin', 'User']} />} />
 
 					<Route path="/skills/singleregister" element={<ProtectedRoute element={<Cadastro />} allowedUserTypes={['SAdmin', 'Admin']} />} />
 					<Route path="/skills/multiregister" element={<ProtectedRoute element={<CadMassa />} allowedUserTypes={['SAdmin', 'Admin']} />} />
@@ -77,10 +75,8 @@ const Router = () => {
 					<Route path="/skills/hubcadastros" element={<ProtectedRoute element={<HubCad />} allowedUserTypes={['SAdmin', 'Admin']} />} />
 					<Route path="/skills/hubtrilhasadm" element={<ProtectedRoute element={<HubTri />} allowedUserTypes={['SAdmin', 'Admin']} />} />
 					<Route path="/skills/trilhascriadas" element={<ProtectedRoute element={<HubTCri />} allowedUserTypes={['SAdmin', 'Admin']} />} />
-					<Route path="/skills/trilhasEx" element={<ProtectedRoute element={<HubTris />} allowedUserTypes={['SAdmin', 'Admin']} />} />
 					<Route path="/skills/hubteam" element={<ProtectedRoute element={<HubTeam />} allowedUserTypes={['SAdmin', 'Admin']} />} />
 					<Route path="/skills/teams" element={<ProtectedRoute element={<HubTeams />} allowedUserTypes={['SAdmin', 'Admin']} />} />
-					<Route path="/skills/adicionar" element={<ProtectedRoute element={<HubAdd />} allowedUserTypes={['SAdmin', 'Admin']} />} />
 
 					<Route path="/skills/criartime" element={<ProtectedRoute element={<TurmaCri />} allowedUserTypes={['SAdmin', 'Admin']} />} />
 					<Route path="/skills/criartrilha" element={<ProtectedRoute element={<MakeTri />} allowedUserTypes={['SAdmin', 'Admin']} />} />

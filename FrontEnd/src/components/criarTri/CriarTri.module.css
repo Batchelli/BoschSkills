@@ -32,7 +32,7 @@
 }
 
 .btAd {
-	background-color: #003253;
+	background-color: #007BC0;
 	color: white;
 	width: 60px;
 	height: 60px;
@@ -182,6 +182,37 @@
 	justify-content: center;
 }
 
+.cLink input[type=checkbox] {
+	position: relative;
+	cursor: pointer;
+}
+
+.cLink input[type=checkbox]:before {
+	content: "";
+	display: block;
+	position: absolute;
+	width: 13px;
+	height: 13px;
+	top: 0;
+	left: 0;
+	background-color: #fff;
+}
+
+.cLink input[type=checkbox]:checked:after {
+	content: "";
+	display: block;
+	width: 2px;
+	height: 5px;
+	border: solid #007BC0;
+	border-width: 0 3px 3px 0;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+	position: absolute;
+	top: 2px;
+	left: 4px;
+}
+
 .contBtAdd {
 	width: 100%;
 	display: flex;
@@ -228,7 +259,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: #003253;
+	background-color: #007BC0;
 	border: 0;
 	border-radius: 8px;
 	color: white;
@@ -327,7 +358,75 @@
 	height: 100%;
 }
 
+.contbtshow {
+	width: 100%;
+	display: flex;
+	flex-direction: row-reverse;
+	position: absolute;
+}
+
+.btshow {
+	width: 175px;
+	height: 70px;
+	margin: 25px;
+	font-size: 18px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #fff;
+	border-radius: 8px;
+	color: black;
+	transition: all 0.2s ease-in-out;
+	cursor: pointer;
+}
+
+.btshow:hover {
+	filter: brightness(120%);
+	transform: scale(1.02);
+}
+
+.btExcluir {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 36px;
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	background-color: transparent;
+	color: white;
+	border: transparent;
+	cursor: pointer;
+}
+
+.btExP{
+	width: 30px;
+	height: 30px;
+	border: 2px solid #e8f1ff;
+	border-radius: 5px;
+	background-color: transparent;
+	color: #e8f1ff;
+	font-size: 18px;
+	cursor: pointer;
+}
+
+.btExP:hover {
+	transform: scale(1.03);
+	border: 2px solid #fff;
+	color: #fff;
+}
+
+@media only screen and (max-width: 1570px) {
+	.contbtshow {
+		top: 550px;
+	}
+}
+
 @media only screen and (max-width: 1180px) {
+	.contbtshow {
+		top: 900px;
+	}
+
 	.contHeader {
 		flex-direction: column;
 	}

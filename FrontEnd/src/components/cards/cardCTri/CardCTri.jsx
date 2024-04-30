@@ -1,39 +1,42 @@
 import React, { useState } from "react";
 import styles from "./CardCTri.module.css";
-import ProgressBar from "../../progress/ProgressBar";
+import { useNavigate } from "react-router-dom";
 
-const CardCTri = ({ nome, lider, time, cargHora, img }) => {
-	const [progressoTrilha, setProgressoTrilha] = useState(0);
+const CardCTri = ({ nome, lider, img, url }) => {
+    const [progressoTrilha, setProgressoTrilha] = useState(0);
 
-	const atualizarProgresso = (novoProgresso) => {
-		setProgressoTrilha(novoProgresso);
-	};
+    const color = localStorage.getItem('color')
+    const navigate = useNavigate()
 
-	const color = localStorage.getItem('color')
+    const tri = () => {
+        console.log("Botão de visualizar clicado!");
+        console.log("Redirecionando para:", url);
+        navigate(url);
+    }
 
-	return (
-		<div className={styles.contTri} style={{ backgroundColor: color }}>
-			<div className={styles.imgMask}>
-				<img src={img} />
-			</div>
-			<div className={styles.details}>
-				<div className={styles.front}>
-					<div className={styles.infosF}>
-						<h1>{nome}</h1>
-						<p>Lider: {lider}</p>
-					</div>
-				</div>
-				<div className={styles.back}>
-					<div className={styles.infosB}>
-						<h1>{nome}</h1>
-					</div>
-					<div className={styles.contmib}>
-						<button className={styles.bt} style={{ color: color }}>Visualizar</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
+    return (
+        <div className={styles.contTri} style={{ backgroundColor: color }}>
+            <div className={styles.imgMask}>
+                <img src={img} alt={nome} />
+            </div>
+            <div className={styles.details}>
+                <div className={styles.front}>
+                    <div className={styles.infosF}>
+                        <h1>{nome}</h1>
+                        <p>Lider: {lider}</p>
+                    </div>
+                </div>
+                <div className={styles.back}>
+                    <div className={styles.infosB}>
+                        <h1>{nome}</h1>
+                    </div>
+                    <div className={styles.contmib}>
+                        <button className={styles.bt} style={{ color: color }} onClick={tri}>Visualizar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export default CardCTri;

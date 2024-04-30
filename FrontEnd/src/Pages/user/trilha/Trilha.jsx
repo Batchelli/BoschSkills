@@ -4,6 +4,7 @@ import styles from "./Trilha.module.css";
 import axios from "axios";
 import api from "../../../api";
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 import {
   VerticalTimeline,
@@ -22,9 +23,11 @@ const Trilha = () => {
   const [isTri, setIsTri] = useState(false);
   const [trilhaSalva, setTrilhaSalva] = useState([]);
 
+  const { id } = useParams()
+
   const get_data = async () => {
     try {
-      const response = await axios.get(`${api}/trail/trails_creator/92902661`);
+      const response = await axios.get(`${api}/trail/trails/${id}`);
       console.log("OI oi");
       if (response.data) {
         console.log(response.data);
@@ -78,7 +81,7 @@ const Trilha = () => {
     <div className={styles.container}>
       <Navbar />
       <div className={styles.cont}>
-        <div className={styles.imgMask} style={{ backgroundImage: `url(${image})`}}></div>
+        <div className={styles.imgMask} style={{ backgroundImage: `url(${image})` }}></div>
         <div className={styles.texts}>
           <div className={styles.title}>
             <h1>{nome}</h1>
